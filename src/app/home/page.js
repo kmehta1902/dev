@@ -2,16 +2,16 @@
 
 import { useEffect } from 'react';
 import Head from 'next/head';
-import Navbar from './components/Navbar/Navbar';
-import Hero from './components/Hero/Hero';
-import Services from './components/Services/Services';
-import Portfolio from './components/Portfolio/Portfolio';
-import Technologies from './components/Technologies/Technologies';
-import DevelopmentProcess from './components/DevelopmentProcess/DevelopmentProcess';
-import Testimonials from './components/Testimonials/Testimonials';
-import QuoteForm from './components/QuoteForm/QuoteForm';
-import ContactForm from './components/ContactForm/ContactForm';
-import Footer from './components/Footer/Footer';
+import Navbar from '../components/Navbar/Navbar';
+import Hero from '../components/Hero/Hero';
+import Services from '../components/Services/Services';
+import Portfolio from '../components/Portfolio/Portfolio';
+import Technologies from '../components/Technologies/Technologies';
+import DevelopmentProcess from '../components/DevelopmentProcess/DevelopmentProcess';
+import Testimonials from '../components/Testimonials/Testimonials';
+import QuoteForm from '../components/QuoteForm/QuoteForm';
+import ContactForm from '../components/ContactForm/ContactForm';
+import Footer from '../components/Footer/Footer';
 
 export default function Home() {
   useEffect(() => {

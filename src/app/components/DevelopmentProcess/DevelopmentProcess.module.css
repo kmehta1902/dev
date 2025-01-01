@@ -1,0 +1,141 @@
+.container {
+    padding: 4rem 2rem;
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #e8f0fe;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 4rem;
+  }
+  
+  .timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .verticalLine {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: calc(100% - 100px);
+    background-color: #0066ff;
+    opacity: 0.3;
+  }
+  
+  .step {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4rem;
+    position: relative;
+  }
+  
+  .step:nth-child(even) .stepContent {
+    margin-left: 50%;
+    margin-right: 0;
+  }
+  
+  .step:nth-child(odd) .stepContent {
+    margin-right: 50%;
+    margin-left: 0;
+  }
+  
+  .stepContent {
+    width: 45%;
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+  }
+  
+  .stepNumber {
+    color: #0066ff;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .stepTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    padding-right: 40px;
+  }
+  
+  .stepDescription {
+    color: #666;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  
+  .dot {
+    width: 12px;
+    height: 12px;
+    background: #0066ff;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 25px;
+    transform: translateX(-50%);
+  }
+  
+  .icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    background-color: #e8f0fe;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .startButton {
+    display: block;
+    margin: 2rem auto 0;
+    padding: 0.75rem 1.5rem;
+    background: #0066ff;
+    color: white;
+    border: none;
+    border-radius: 1.75rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .startButton:hover {
+    background: #0052cc;
+  }
+  
+  @media (max-width: 768px) {
+    .step:nth-child(even) .stepContent,
+    .step:nth-child(odd) .stepContent {
+      width: 90%;
+      margin: 0 auto;
+    }
+    
+    .verticalLine {
+      left: 20px;
+      transform: none;
+    }
+    
+    .dot {
+      left: 20px;
+      transform: none;
+    }
+  }

@@ -1,0 +1,108 @@
+.quoteContainer {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .quoteContainer h1 {
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    color: #1e293b;
+  }
+  
+  .quoteContainer p {
+    color: #64748b;
+    margin-bottom: 2rem;
+  }
+  
+  .form {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .formGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .formGroup {
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+  
+  .formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+    font-weight: 500;
+  }
+  
+  .formGroup input,
+  .formGroup select,
+  .formGroup textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #1e293b;
+  }
+  
+  .formGroup textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+  
+  .terms {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .terms input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .terms span {
+    color: #64748b;
+    font-size: 0.9rem;
+  }
+  
+  .terms a {
+    color: #3b82f6;
+    text-decoration: none;
+  }
+  
+  .submitButton {
+    background: #3b82f6;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0 auto;
+    transition: background 0.3s;
+  }
+  
+  .submitButton:hover {
+    background: #2563eb;
+  }
+  @media (max-width: 768px) {
+    .formGrid,
+    .contactGrid,
+    .footerGrid {
+      grid-template-columns: 1fr;
+    }
+  }
