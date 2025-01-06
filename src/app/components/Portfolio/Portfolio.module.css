@@ -82,19 +82,32 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* New styles for card header and icon */
+.cardHeader {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.projectIcon {
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
 .projectTitle {
   color: white;
   font-size: 1.4rem;
   font-weight: bold;
-  position: absolute;
-  z-index: 1;
-  transition: all 0.3s ease;
-  width: 100%;
   text-align: center;
+  transition: all 0.3s ease;
   padding: 0 1.5rem;
 }
 
-/* Card overlay content */
 .cardOverlay {
   position: absolute;
   top: 0;
@@ -116,8 +129,8 @@
   opacity: 1;
 }
 
-.projectCard:hover .projectTitle {
-  transform: translateY(-50px);
+.projectCard:hover .cardHeader {
+  transform: translateY(-20px);
 }
 
 .projectDescription {
@@ -159,11 +172,11 @@
 
 /* Gradient backgrounds */
 .blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
-.purple { background: linear-gradient(135deg, #3b82f6, #7c3aed); }
-.pink { background: linear-gradient(135deg, #7c3aed, #db2777); }
-.green { background: linear-gradient(135deg, #10b981, #3b82f6); }
-.orange { background: linear-gradient(135deg, #f59e0b, #dc2626); }
-.indigo { background: linear-gradient(135deg, #4f46e5, #3b82f6); }
+.purple { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.pink { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.green { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.orange { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+.indigo { background: linear-gradient(135deg, #3b82f6, #2563eb); }
 
 .viewMore {
   text-align: center;

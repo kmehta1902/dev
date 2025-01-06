@@ -1,90 +1,93 @@
 .wrapper {
   width: 100%;
   background-color: rgb(249, 250, 251);
-  padding-top: clamp(4rem, 10vw, 7rem);
-  padding-bottom: clamp(3rem, 8vw, 5rem);
+  padding-top: clamp(3.5rem, 6vw, 4rem);
+  padding-bottom: clamp(1.5rem, 4vw, 3rem);
   overflow: hidden;
 }
 
 .container {
-  width: 100%;
-  max-width: 80rem;
+  max-width: 90rem;
   margin: 0 auto;
-  padding: 0 clamp(1rem, 3vw, 2rem);
+  padding: 2rem 0.15rem;
 }
 
 .grid {
   display: flex;
-  flex-direction: column;
-  gap: clamp(2rem, 5vw, 3rem);
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 4rem;
 }
 
 .content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1rem, 3vw, 1.5rem);
+  max-width: 45%;
 }
 
 .badge {
   display: inline-flex;
-  width: fit-content;
-  background-color: rgb(219, 234, 254);
-  padding: 0.5rem 1rem;
+  background-color: rgba(37, 99, 235, 0.1);
+  color: rgb(37, 99, 235);
+  padding: 0.5rem 1.5rem;
   border-radius: 9999px;
-  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: -0.025em;
+  position: relative;
   overflow: hidden;
 }
 
+.badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 100%
+  );
+  animation: shineBadge 3s linear infinite;
+}
+
 .heading {
-  font-size: clamp(2rem, 8vw, 5rem);
+  font-size: 4rem;
   line-height: 1.1;
   font-weight: 700;
+  margin: 1.5rem 0;
   letter-spacing: -0.025em;
-  width: 100%;
-  margin-bottom: clamp(0.5rem, 2vw, 1rem);
-  word-break: break-word;
-  hyphens: auto;
 }
 
 .highlight {
+  font-size: 4rem;
   color: rgb(37, 99, 235);
-  position: relative;
-  display: inline;
   padding: 0 0.2rem;
   background: linear-gradient(to right, rgba(219, 234, 254, 0.3), rgba(219, 234, 254, 0.1));
   border-radius: 4px;
-  font-size: inherit;
-  line-height: inherit;
-  white-space: normal;
-  word-wrap: break-word;
 }
 
-
 .description {
-  color: rgb(75, 85, 99);
-  font-size: clamp(1rem, 3vw, 1.125rem);
+  font-size: 1.125rem;
   line-height: 1.75;
+  color: rgb(75, 85, 99);
+  margin-bottom: 2rem;
 }
 
 .buttonGroup {
   display: flex;
-  flex-direction: column;
   gap: 1rem;
-  width: 100%;
 }
 
 .primaryButton {
-  width: 100%;
-  padding: clamp(0.625rem, 2vw, 0.75rem) clamp(1.25rem, 3vw, 1.5rem);
+  padding: 0.75rem 1.5rem;
   background-color: rgb(37, 99, 235);
   color: white;
   border-radius: 1.5rem;
+  font-size: larger;
   font-weight: 600;
   transition: all 0.2s;
-  will-change: transform;
 }
 
 .primaryButton:hover {
@@ -92,14 +95,13 @@
 }
 
 .secondaryButton {
-  width: 100%;
-  padding: clamp(0.625rem, 2vw, 0.75rem) clamp(1.25rem, 3vw, 1.5rem);
+  padding: 0.75rem 1.5rem;
   border: 2px solid rgb(37, 99, 235);
   color: rgb(37, 99, 235);
   border-radius: 1.5rem;
   font-weight: 600;
+  font-size: larger;
   transition: all 0.2s;
-  will-change: transform;
 }
 
 .secondaryButton:hover {
@@ -108,56 +110,31 @@
 }
 
 .imageSection {
-  width: 100%;
-  margin-top: clamp(2rem, 5vw, 0);
+  width: 45%;
+  aspect-ratio: 1;
 }
 
 .imageContainer {
   width: 100%;
   aspect-ratio: 1;
-  background-image: radial-gradient(circle at center, rgb(239, 246, 255), white);
   border-radius: 1rem;
   position: relative;
-  overflow: visible;
-  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+  overflow: hidden;
 }
 
 .animationWrapper {
-  overflow: hidden;
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, transparent 30%, rgba(219, 234, 254, 0.2) 70%);
 }
 
 .shape {
-  width: 16rem;
-  height: 16rem;
+  width: clamp(16rem, 30vw, 24rem);
+  height: clamp(16rem, 30vw, 24rem);
   position: relative;
-  animation: orbit 10s linear infinite; /* Add orbit animation */
-}
-
-@keyframes orbit {
-  0% {
-    transform: translate(0px, 0px);
-  }
-  25% {
-    transform: translate(90px, 20px); /* Move right and down */
-  }
-  50% {
-    transform: translate(0px, 90px); /* Move down */
-  }
-  70% {
-    transform: translate(-90px, 20px); /* Move left and down */
-  }
-  80%{
-    transform: translate(-90px, -50px); 
-  }
-  100% {
-    transform: translate(0px, 0px); /* Move to start */
-  }
+  animation: orbit 10s linear infinite;
 }
 
 .animatedCircle {
@@ -171,7 +148,6 @@
 .animatedCircle:nth-child(1) {
   width: 100%;
   height: 100%;
-  animation-delay: 0s;
 }
 
 .animatedCircle:nth-child(2) {
@@ -186,7 +162,6 @@
   animation-delay: -2s;
 }
 
-/* Floating dots */
 .floatingDot {
   position: absolute;
   width: 6px;
@@ -220,10 +195,9 @@
   animation: float 5s ease-in-out infinite -3s;
 }
 
-/* Glowing rings */
 .glowingRing {
   position: absolute;
-  inset: -20%;
+  inset: -10%;
   border: 2px solid rgb(37, 99, 235);
   border-radius: 50%;
   opacity: 0.2;
@@ -231,260 +205,87 @@
 }
 
 .glowingRing:nth-child(2) {
-  inset: -15%;
+  inset: -8%;
   animation-duration: 15s;
   animation-direction: reverse;
 }
 
 .glowingRing:nth-child(3) {
-  inset: -10%;
+  inset: -6%;
   animation-duration: 10s;
 }
 
-@keyframes moveInCircle {
+@keyframes shineBadge {
   0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(100px, 0);
-  }
-  50% {
-    transform: translate(100px, 100px);
-  }
-  75% {
-    transform: translate(0, 100px);
+    left: -100%;
   }
   100% {
-    transform: translate(0, 0);
+    left: 200%;
   }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.15;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.3;
-  }
+@keyframes orbit {
+  0% { transform: translate(0px, 0px); }
+  25% { transform: translate(20px, 10px); }
+  50% { transform: translate(0px, 20px); }
+  75% { transform: translate(-20px, 10px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+@keyframes moveInCircle {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(25px, 0); }
+  50% { transform: translate(25px, 25px); }
+  75% { transform: translate(0, 25px); }
+  100% { transform: translate(0, 0); }
 }
 
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0) translateX(0);
-  }
-  25% {
-    transform: translateY(-10px) translateX(5px);
-  }
-  50% {
-    transform: translateY(0) translateX(10px);
-  }
-  75% {
-    transform: translateY(10px) translateX(5px);
-  }
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(3px, -3px); }
+  50% { transform: translate(5px, 0); }
+  75% { transform: translate(3px, 3px); }
 }
 
 @keyframes rotate {
-  from {
-    transform: rotate(0deg);
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 1rem 1.5rem;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .grid {
+    gap: 3rem;
+  }
+  
+  .heading, .highlight {
+    font-size: 3.5rem;
   }
 }
 
-/* Animation Styles */
-.blurText {
-  display: inline-block;
-  will-change: filter, opacity;
-}
-
-.shinyText {
-  position: relative;
-  color: rgb(37, 99, 235);
-  display: inline-block;
-}
-
-.shinyText::before {
-  content: attr(data-text);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0) 40%,
-    rgba(255, 255, 255, 1) 50%,
-    rgba(255, 255, 255, 0) 60%
-  );
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: shine var(--animation-duration, 5s) linear infinite;
-}
-
-.sequentialWrapper {
-  display: inline-flex;
-  flex-wrap: wrap;
-}
-
-.sequentialChar {
-  position: relative;
-  color: rgb(37, 99, 235);
-  opacity: 0;
-  animation: appearAndShine 2s forwards;
-  animation-delay: var(--animation-delay);
-}
-
-.sequentialChar::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.8) 50%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-  animation: shineAndBold 2s forwards;
-  animation-delay: var(--animation-delay);
-}
-
-@keyframes appearAndShine {
-  0% {
-    opacity: 0;
-    font-weight: normal;
+@media (max-width: 768px) {
+  .container {
+    padding: 2.75rem;
   }
-  20% {
-    opacity: 1;
-    font-weight: normal;
+  
+  .grid {
+    flex-direction: column;
+    gap: 2rem;
   }
-  90%, 100% {
-    opacity: 1;
-    font-weight: bold;
+  
+  .content, .imageSection {
+    width: 100%;
+    max-width: 100%;
   }
-}
-
-@keyframes shineAndBold {
-  0% {
-    transform: translateX(-100%);
+  
+  .heading, .highlight {
+    font-size: 2.5rem;
   }
-  50%, 100% {
-    transform: translateX(200%);
-  }
-}
-
-@keyframes shine {
-  0% {
-    background-position: 200% center;
-  }
-  100% {
-    background-position: -200% center;
-  }
-}
-
-@keyframes countUp {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  20% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@media (min-width: 640px) {
+  
   .buttonGroup {
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
   }
-
-  .badge {
-    width: fit-content;
-  }
-}
-
-@media (min-width: 768px) {
-  .grid {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 2rem; /* Reduced gap to allow more space for content */
-  }
-
-  .content {
-    width: 55%; /* Increased width for content area */
-    max-width: none; /* Remove max-width constraint */
-  }
-
-  .heading {
-    max-width: none; 
-    font-size: 3.5rem;
-  }
-
-  .highlight {
-    display: inline;
-    font-size: 3.5rem;
-  }
-
-  .imageSection {
-    width: 45%; /* Decreased width to give more space to content */
-    position: sticky;
-    top: 7rem;
-    margin-top: 0;
-  }
-
-  /* Adjust shape size based on viewport */
-  .shape {
-    width: clamp(16rem, 30vw, 24rem);
-    height: clamp(16rem, 30vw, 24rem);
-  }
-}
-
-@media (min-width: 1024px) {
-  .heading {
-    font-size:4.2rem /* Even larger font size for bigger screens */
-  }
-  
-  .content {
-    padding-right: 1rem; /* Add some padding to prevent text from touching the image */
-  }
-}
-
-@media (min-width: 1280px) {
-  .heading {
-    font-size: 4.5rem /* Maximum size for very large screens */
-  }
-  
-  .grid {
-    gap: 3rem; /* Slightly increase gap for better spacing on very large screens */
-  }
-}
-
-/* Update description size as well for better proportion */
-.description {
-  color: rgb(75, 85, 99);
-  font-size: clamp(1rem, 2.5vw, 1.25rem);
-  line-height: 1.75;
-  max-width: none; /* Remove any max-width constraints */
 }

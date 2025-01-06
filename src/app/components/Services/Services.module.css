@@ -1,11 +1,10 @@
-/* Services.module.css */
 .services {
   padding: 5rem 0;
-  background-color: #f9fafb;
+  background-color: rgb(249, 250, 251);
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0 1.5rem;
 }
@@ -19,11 +18,11 @@
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  color: #1f2937;
+  color: black;
 }
 
 .description {
-  color: #4b5563;
+  color: black;
   max-width: 600px;
   margin: 0 auto;
   font-size: 1.125rem;
@@ -37,28 +36,26 @@
 
 .card {
   position: relative;
-  background-color: white;
+  background-color: #1f2937;
   border-radius: 1rem;
   overflow: hidden;
   padding: 2rem;
   isolation: isolate;
   transition: all 0.3s ease;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #374151;
 }
 
 .spotlight {
   position: absolute;
-  /* Remove top and left since we'll control position with JavaScript */
   width: 250px;
   height: 250px;
   background: radial-gradient(
     circle at center,
-    rgba(37, 99, 235, 0.1) 0%,
-    rgba(37, 99, 235, 0) 70%
+    rgba(229, 231, 235, 0.15) 0%,
+    rgba(229, 231, 235, 0.05) 70%
   );
   border-radius: 50%;
   pointer-events: none;
-  /* Remove transition for instant movement */
   z-index: 1;
 }
 
@@ -74,25 +71,25 @@
   width: 3rem;
   height: 3rem;
   border-radius: 0.75rem;
-  background-color: #f0f7ff;
+  background-color: rgba(37, 99, 235, 0.2);
   margin-bottom: 1.5rem;
 }
 
 .icon {
   width: 1.5rem;
   height: 1.5rem;
-  color: #2563eb;
+  color: #60a5fa;
 }
 
 .cardTitle {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #1f2937;
+  color: #ffffff;
   margin-bottom: 1rem;
 }
 
 .cardDescription {
-  color: #6b7280;
+  color: #9ca3af;
   font-size: 0.875rem;
   line-height: 1.5;
   margin-bottom: 1.5rem;
@@ -109,12 +106,12 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.875rem;
-  color: #4b5563;
+  color: #d1d5db;
   margin-bottom: 0.5rem;
 }
 
 .checkmark {
-  color: #22c55e;
+  color: #34d399;
   font-weight: bold;
 }
 
@@ -128,16 +125,13 @@
   .services {
     padding: 4rem 0;
   }
-
   .title {
     font-size: 2rem;
   }
-
   .grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-
   .card {
     padding: 1.5rem;
   }
@@ -147,15 +141,12 @@
   .container {
     padding: 0 1rem;
   }
-
   .header {
     margin-bottom: 3rem;
   }
-
   .title {
     font-size: 1.75rem;
   }
-
   .description {
     font-size: 1rem;
   }
@@ -163,7 +154,7 @@
 
 @media (hover: hover) and (pointer: fine) {
   .card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
   }
 }
