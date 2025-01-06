@@ -1,75 +1,131 @@
+// Services.js
 'use client';
 
+import { useRef, useState } from 'react';
 import styles from './Services.module.css';
+import { Monitor, Building2, Cloud, LightbulbIcon, Globe, Smartphone, Rocket, Palette, Users } from 'lucide-react';
+
+const ServiceCard = ({ service }) => {
+  const divRef = useRef(null);
+  const [isFocused, setIsFocused] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    if (!divRef.current) return;
+
+    const div = divRef.current;
+    const rect = div.getBoundingClientRect();
+    
+    setPosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
+  return (
+    <div
+      ref={divRef}
+      className={styles.card}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsFocused(true)}
+      onMouseLeave={() => setIsFocused(false)}
+    >
+      <div
+        className={styles.spotlight}
+        style={{
+          opacity: isFocused ? 1 : 0,
+          transform: `translate(${position.x}px, ${position.y}px)`,
+        }}
+      />
+      <div className={styles.cardContent}>
+        <div className={styles.iconWrapper}>
+          {service.icon}
+        </div>
+        <h3 className={styles.cardTitle}>{service.title}</h3>
+        <p className={styles.cardDescription}>{service.description}</p>
+        <ul className={styles.featureList}>
+          {service.features.map((feature, index) => (
+            <li key={index} className={styles.featureItem}>
+              <span className={styles.checkmark}>✓</span>
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+};
 
 export default function Services() {
-  // Ensure all values are serializable
   const services = [
     {
-      title: 'Web Development',
-      description:
-        'Custom web applications, responsive websites, and progressive web apps built with cutting-edge technologies.',
-      icon: '💻', // Emoji icons are serializable as strings
-    },
-    {
-      title: 'Mobile Development',
-      description:
-        'Native and cross-platform mobile applications for iOS and Android platforms.',
-      icon: '📱',
+      title: 'Customised Software Development',
+      description: 'Tailored software solutions to meet your specific business requirements.',
+      icon: <Monitor className={styles.icon} />,
+      features: ['Custom Development', 'Scalable Solutions', 'Modern Technologies']
     },
     {
       title: 'Enterprise Solutions',
-      description:
-        'Scalable enterprise software solutions, CRM systems, and business process automation.',
-      icon: '🏢',
+      description: 'Comprehensive enterprise-grade solutions for large-scale operations.',
+      icon: <Building2 className={styles.icon} />,
+      features: ['Business Integration', 'Process Automation', 'Enterprise Security']
     },
     {
       title: 'Cloud Solutions',
-      description:
-        'Cloud infrastructure setup, migration services, and managed cloud solutions.',
-      icon: '☁️',
+      description: 'Secure and scalable cloud infrastructure and services.',
+      icon: <Cloud className={styles.icon} />,
+      features: ['Cloud Migration', 'AWS/Azure Services', 'Cloud Security']
+    },
+    {
+      title: 'IT Consultancy',
+      description: 'Expert guidance for your digital transformation journey.',
+      icon: <LightbulbIcon className={styles.icon} />,
+      features: ['Strategic Planning', 'Technical Advisory', 'Digital Transformation']
+    },
+    {
+      title: 'Web Application Development',
+      description: 'Modern and responsive web applications built with cutting-edge technologies.',
+      icon: <Globe className={styles.icon} />,
+      features: ['Responsive Design', 'Performance Optimization', 'SEO Ready']
+    },
+    {
+      title: 'iOS/Android App Development',
+      description: 'Native and cross-platform mobile applications.',
+      icon: <Smartphone className={styles.icon} />,
+      features: ['Native Apps', 'Cross-Platform', 'User-Centric Design']
+    },
+    {
+      title: 'MVP Product Development',
+      description: 'Rapid development of minimum viable products for quick market entry.',
+      icon: <Rocket className={styles.icon} />,
+      features: ['Rapid Development', 'Core Features', 'Market Testing']
     },
     {
       title: 'UI/UX Design',
-      description:
-        'User-centered design solutions, interface design, and user experience optimization.',
-      icon: '🎨',
+      description: 'User-centered design solutions for optimal user experience.',
+      icon: <Palette className={styles.icon} />,
+      features: ['User Research', 'Interface Design', 'Usability Testing']
     },
     {
-      title: 'IT Consulting',
-      description:
-        'Strategic technology consulting, digital transformation, and technical advisory services.',
-      icon: '⚡',
-    },
+      title: 'Tech Resources',
+      description: 'Skilled technical resources for your project needs.',
+      icon: <Users className={styles.icon} />,
+      features: ['Skilled Teams', 'Flexible Hiring', 'Project Management']
+    }
   ];
 
   return (
     <section id="services" className={styles.services}>
       <div className={styles.container}>
-        {/* Header Section */}
         <div className={styles.header}>
           <h2 className={styles.title}>Our Services</h2>
           <p className={styles.description}>
             We offer comprehensive software development solutions tailored to meet your business needs.
           </p>
         </div>
-
-        {/* Services Grid */}
         <div className={styles.grid}>
           {services.map((service, index) => (
-            <div key={index} className={styles.card}>
-              {/* Service Icon */}
-              <div className={styles.icon}>{service.icon}</div>
-
-              {/* Service Title */}
-              <h3 className={styles.cardTitle}>{service.title}</h3>
-
-              {/* Service Description */}
-              <p className={styles.cardDescription}>{service.description}</p>
-
-              {/* Learn More Link */}
-              <a href="#" className={styles.learnMore}>Learn More →</a>
-            </div>
+            <ServiceCard key={index} service={service} />
           ))}
         </div>
       </div>

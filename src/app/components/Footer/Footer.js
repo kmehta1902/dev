@@ -21,11 +21,11 @@ const Footer = () => {
         <div className={styles.section}>
           <h3>Services</h3>
           <ul>
-            <li><a href="#services">Web Development</a></li>
-            <li><a href="#services">Mobile Development</a></li>
-            <li><a href="#services">Cloud Solutions</a></li>
-            <li><a href="#services">Enterprise Software</a></li>
-            <li><a href="#services">Digital Transformation</a></li>
+            <li><a href="#">Web Development</a></li>
+            <li><a href="#">Mobile Development</a></li>
+            <li><a href="#">Cloud Solutions</a></li>
+            <li><a href="#">Enterprise Software</a></li>
+            <li><a href="#">Digital Transformation</a></li>
           </ul>
         </div>
 
@@ -33,10 +33,10 @@ const Footer = () => {
         <div className={styles.section}>
           <h3>Quick Links</h3>
           <ul>
-            <li><a href="#home">About Us</a></li>
-            <li><a href="#technologies">Our Work</a></li>
-            <li><a href="#quoteform">Get a Quote</a></li>
-            <li><a href="#contactform">Contact Us</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Work</a></li>
+            <li><a href="#">Get a Quote</a></li>
+            <li><a href="#">Contact Us</a></li>
             <li><a href="#">Careers</a></li>
           </ul>
         </div>

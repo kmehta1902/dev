@@ -2,130 +2,180 @@
 import { useState } from 'react';
 import styles from './QuoteForm.module.css';
 
-export default function QuoteForm() {
+const QuoteForm = () => {
   const [formData, setFormData] = useState({
     fullName: '',
     companyName: '',
     email: '',
     phone: '',
-    projectType: '',
-    budgetRange: '',
-    projectDescription: '',
-    agreeToTerms: false
+    services: {
+      webDevelopment: false,
+      mobileAppDevelopment: false,
+      aiMlSolutions: false,
+      cloudServices: false,
+      uiUxDesign: false,
+      itConsulting: false
+    },
+    projectBudget: '',
+    projectTimeline: '',
+    projectDescription: ''
   });
 
-  function handleSubmit(e)  {
+  const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
   };
 
+
   return (
     <section id='quoteform' className={styles.quoteContainer}>
-      <h1>Get a Free Quote</h1>
-      <p>Share your project details with us, and we'll provide you with a comprehensive proposal</p>
-      
-      <form  className={styles.form}>
-        <div className={styles.formGrid}>
-          <div className={styles.formGroup}>
-            <label>Full Name *</label>
-            <input
-              type="text"
-              placeholder="Enter your full name"
-              value={formData.fullName}
-              onChange={(e) => setFormData({...formData, fullName: e.target.value})}
-              required
-            />
-          </div>
-          
-          <div className={styles.formGroup}>
-            <label>Company Name</label>
-            <input
-              type="text"
-              placeholder="Enter your company name"
-              value={formData.companyName}
-              onChange={(e) => setFormData({...formData, companyName: e.target.value})}
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label>Email Address *</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={(e) => setFormData({...formData, email: e.target.value})}
-              required
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label>Phone Number *</label>
-            <input
-              type="tel"
-              placeholder="Enter your phone number"
-              value={formData.phone}
-              onChange={(e) => setFormData({...formData, phone: e.target.value})}
-              required
-            />
-          </div>
-
-          <div className={styles.formGroup}>
-            <label>Project Type *</label>
-            <select
-              value={formData.projectType}
-              onChange={(e) => setFormData({...formData, projectType: e.target.value})}
-              required
-            >
-              <option value="">Select project type</option>
-              <option value="web">Web Development</option>
-              <option value="mobile">Mobile Development</option>
-              <option value="cloud">Cloud Solutions</option>
-              <option value="enterprise">Enterprise Software</option>
-            </select>
-          </div>
-
-          <div className={styles.formGroup}>
-            <label>Budget Range *</label>
-            <select
-              value={formData.budgetRange}
-              onChange={(e) => setFormData({...formData, budgetRange: e.target.value})}
-              required
-            >
-              <option value="">Select budget range</option>
-              <option value="small">$5,000 - $10,000</option>
-              <option value="medium">$10,000 - $25,000</option>
-              <option value="large">$25,000+</option>
-            </select>
+      <h1 className={styles.title}>Get a Free Quote</h1>
+      <p className={styles.subbtitle}>Share your project details with us, and we'll provide you with a comprehensive proposal</p>
+      <div></div>
+      <div className={styles.formContainer}>
+      <form onSubmit={handleSubmit} className={styles.formSection}>
+        {/* Project Details Section */}
+        <div>
+          <h2 className={styles.sectionTitle}>Project Details</h2>
+          <div className={styles.gridContainer}>
+            <div>
+              <label className={styles.formField}>Full Name *</label>
+              <input
+                type="text"
+                placeholder="John Doe"
+                className={styles.input}
+                value={formData.fullName}
+                onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+              />
+            </div>
+            <div>
+              <label className={styles.formField}>Company Name</label>
+              <input
+                type="text"
+                placeholder="Your Company"
+                className={styles.input}
+                value={formData.companyName}
+                onChange={(e) => setFormData({...formData, companyName: e.target.value})}
+              />
+            </div>
+            <div>
+              <label className={styles.formField}>Email Address *</label>
+              <input
+                type="email"
+                placeholder="john@example.com"
+                className={styles.input}
+                value={formData.email}
+                onChange={(e) => setFormData({...formData, email: e.target.value})}
+              />
+            </div>
+            <div>
+              <label className={styles.formField}>Phone Number *</label>
+              <input
+                type="tel"
+                placeholder="+1 (555) 000-0000"
+                className={styles.input}
+                value={formData.phone}
+                onChange={(e) => setFormData({...formData, phone: e.target.value})}
+              />
+            </div>
           </div>
         </div>
 
-        <div className={styles.formGroup}>
-          <label>Project Description *</label>
+        {/* Services Required Section */}
+        <div>
+          <h2 className={styles.sectionTitle}>Services Required</h2>
+          <div className={styles.servicesGrid}>
+            {Object.entries(formData.services).map(([key, value]) => (
+              <label key={key} className={styles.checkboxLabel}>
+                <input
+                  type="checkbox"
+                  className={styles.checkbox}
+                  checked={value}
+                  onChange={(e) => setFormData({
+                    ...formData,
+                    services: {...formData.services, [key]: e.target.checked}
+                  })}
+                />
+                <span className={styles.checkboxText}>
+                  {key.replace(/([A-Z])/g, ' $1').trim()}
+                </span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Project Budget Section */}
+        <div>
+          <h2 className={styles.sectionTitle}>Project Budget</h2>
+          <div className={styles.budgetGrid}>
+            {[
+              ['5000-10000', '$5,000 - $10,000'],
+              ['10000-25000', '$10,000 - $25,000'],
+              ['25000+', '$25,000+']
+            ].map(([value, label]) => (
+              <label key={value} className={styles.radioLabel}>
+                <input
+                  type="radio"
+                  name="budget"
+                  className={styles.radio}
+                  value={value}
+                  checked={formData.projectBudget === value}
+                  onChange={(e) => setFormData({...formData, projectBudget: e.target.value})}
+                />
+                <span className={styles.radioText}>{label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Project Timeline Section */}
+        <div>
+          <h2 className={styles.sectionTitle}>Project Timeline</h2>
+          <div className={styles.budgetGrid}>
+            {[
+              ['1-3', '1-3 Months'],
+              ['3-6', '3-6 Months'],
+              ['6+', '6+ Months']
+            ].map(([value, label]) => (
+              <label key={value} className={styles.radioLabel}>
+                <input
+                  type="radio"
+                  name="timeline"
+                  className={styles.radio}
+                  value={value}
+                  checked={formData.projectTimeline === value}
+                  onChange={(e) => setFormData({...formData, projectTimeline: e.target.value})}
+                />
+                <span className={styles.radioText}>{label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+
+        {/* Project Description Section */}
+        <div>
+          <h2 className={styles.sectionTitle}>Project Description</h2>
           <textarea
-            placeholder="Please describe your project requirements, goals, and timeline..."
+            placeholder="Please describe your project requirements, goals, and any specific features you need..."
+            className={styles.textarea}
             value={formData.projectDescription}
             onChange={(e) => setFormData({...formData, projectDescription: e.target.value})}
-            required
-            rows={5}
           />
         </div>
 
-        <div className={styles.terms}>
-          <input
-            type="checkbox"
-            checked={formData.agreeToTerms}
-            onChange={(e) => setFormData({...formData, agreeToTerms: e.target.checked})}
-            required
-          />
-          <span>
-            I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>
-          </span>
+        {/* Submit Button */}
+        <div className={styles.submitContainer}>
+          <button type="submit" className={styles.submitButton}>
+            Get Your Free Quote
+          </button>
+          <p className={styles.disclaimer}>* We'll get back to you within 24 hours with a detailed quote.</p>
         </div>
-
-        <button type="submit" className={styles.submitButton} onClick={(e)=>{handleSubmit(e)}}>
-          Submit Quote Request <span>→</span>
-        </button>
       </form>
+    </div>
+  
+
+      
     </section>
   );
 }
+export default QuoteForm

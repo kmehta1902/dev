@@ -1,0 +1,70 @@
+.stats {
+  background-color: rgb(249, 250, 251);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    /* margin-top: 2rem; */
+    width: 100%;
+  }
+  
+  .statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    
+    
+  }
+  
+  .statNumber {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 700;
+    display: block;
+    color: rgb(37, 99, 235);
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: countUp 2s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+    animation-delay: var(--count-delay, 0s);
+  }
+  
+  .statLabel {
+    font-size: clamp(0.75rem, 2vw, 0.875rem);
+    color: rgb(107, 114, 128);
+    font-weight: 500;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+    animation-delay: calc(var(--count-delay, 0s) + 0.5s);
+  }
+  
+  @keyframes countUp {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    20% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @media (max-width: 640px) {
+    .stats {
+      gap: 0.75rem;
+    }
+    
+    .statItem {
+      padding: 0.75rem;
+    }
+  }

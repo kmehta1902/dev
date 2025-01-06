@@ -40,8 +40,6 @@ export default function Navbar() {
           <span></span>
           <span></span>
           <span></span>
-          
-          
         </button>
       </div>
 
@@ -50,16 +48,11 @@ export default function Navbar() {
           <a href="#home" className={styles.mobileLink}>Home</a>
           <a href="#services" className={styles.mobileLink}>Services</a>
           <a href="#portfolio" className={styles.mobileLink}>Portfolio</a>
-          <a href="#technologies" className={styles.mobileLink}>Technologies</a>
-          <a href="#developmentprocess" className={styles.mobileLink}>Process</a>
-          <a href="#testimonials" className={styles.mobileLink}>Testimonials</a>
-          <a href="#contactform" className={styles.mobileLink}>Contact</a>
-          <button className={styles.quoteButton} onClick={() => {
-    const quoteSection = document.querySelector('#quoteform');
-    if (quoteSection) {
-      quoteSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  }}>Get a Quote</button>
+          <a href="#" className={styles.mobileLink}>Technologies</a>
+          <a href="#" className={styles.mobileLink}>Process</a>
+          <a href="#" className={styles.mobileLink}>Testimonials</a>
+          <a href="#" className={styles.mobileLink}>Contact</a>
+          <button className={styles.quoteButton}>Get a Quote</button>
         </div>
       </div>
     </nav>

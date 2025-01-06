@@ -13,6 +13,7 @@ import QuoteForm from '../components/QuoteForm/QuoteForm';
 import ContactForm from '../components/ContactForm/ContactForm';
 import Footer from '../components/Footer/Footer';
 
+
 export default function Home() {
   useEffect(() => {
     const handleSmoothScroll = (event) => {
@@ -56,6 +57,7 @@ export default function Home() {
 
       <main>
         <Navbar />
+
         <Hero />
         <Services />
         <Portfolio />
