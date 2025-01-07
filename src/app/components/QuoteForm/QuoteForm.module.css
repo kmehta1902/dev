@@ -162,7 +162,7 @@
   color: white;
   font-weight: 500;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: 2rem;
   cursor: pointer;
   transition: background-color 0.2s;
 }
