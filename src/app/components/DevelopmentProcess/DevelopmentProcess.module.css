@@ -184,7 +184,7 @@
   
   .step:nth-child(even) .stepContent,
   .step:nth-child(odd) .stepContent {
-    width: calc(100% - 60px);
-    margin-left: 60px;
+    width: calc(100% - 35px);
+    margin-left: 50px;
   }
 }
