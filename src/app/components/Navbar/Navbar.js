@@ -183,7 +183,7 @@ const Navbar = () => {
                                         {dropdownContent.services.map((item) => (
                                             <Link
                                             key={item.title}
-                                            href={`/services/${item.title
+                                            href={`/Services/${item.title
                                                 .toLowerCase() // Convert to lowercase
                                                 .replace(/\s+/g, '-') // Replace spaces with hyphens
                                                 .replace(/[^\w-]/g, '') // Remove special characters except hyphens
