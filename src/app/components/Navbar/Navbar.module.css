@@ -1,212 +1,378 @@
 .navbar {
-  position: fixed;
+  position: sticky;
   top: 0;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   width: 100%;
   height: 70px;
-  background-color: white;
-  z-index: 50;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  padding: 0 5rem;
 }
 
-.container {
-  max-width: 1280px;
-  width: 100%;
-  height: 100%;
-  margin: 0 auto;
-  padding: 0 20px;
+.navbarContent {
+  margin: 0 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  padding: 0 1rem;
+  position: relative;
 }
 
-/* Logo Styling */
+/* Logo styles */
 .logo {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: #2563eb;
+  width: 120px;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+/* Navigation wrapper for centering */
+.navLinksWrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  align-items: center;
-  white-space: nowrap; /* Prevents logo from wrapping */
+  justify-content: center;
 }
 
-.logoTech {
-  color: #1f2937;
-  font-weight: 400;
-  margin-left: 0.2rem;
-}
-
-/* Navigation Links */
+/* Main navigation styles */
 .navLinks {
   display: flex;
-  gap: 2rem;
+  gap: 1.6rem;
   align-items: center;
+  justify-content: center;
+  height: 70px;
 }
 
-.link {
-  color: #4b5563;
+.navLink {
   text-decoration: none;
-  font-size: 0.95rem;
+  color: #4a4a4a;
+  font-size: 13.5px;
   font-weight: 500;
-  transition: color 0.2s;
-}
-
-.link:hover {
-  color: #2563eb;
-}
-
-/* Right Section Styling */
-.connect {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-.contact {
-  color: #2563eb;
-  text-decoration: none;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.contact:hover {
-  color: #1d4ed8;
-}
-
-.quoteButton {
-  background-color: #2563eb;
-  color: white;
-  padding: 0.6rem 1.5rem;
-  border-radius: 1.75rem;
-  font-size: 0.95rem;
-  font-weight: 500;
-  border: none;
+  padding: 0.4rem 0;
   cursor: pointer;
-  transition: all 0.3s;
-  white-space: nowrap; /* Prevents button text from wrapping */
+  transition: color 0.2s ease;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  height: 100%;
 }
 
-.quoteButton:hover {
-  background-color: #1d4ed8;
+.navLink:hover {
+  color: #0066ff;
 }
 
-/* Hamburger Menu */
+/* Dropdown styles */
+.dropdownContainer {
+  /* 
+  height: 100%;
+  display: flex;
+  align-items: center; */
+  position: static;
+  /* position: relative; */
+  display: inline-block;
+}
+
+.dropdown {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 700px;
+  background-color: white;
+  border-radius: 0 0 12px 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  z-index: 1000;
+  border: 1px solid #f0f0f0;
+  margin-top: 1.3rem;
+}
+
+/* Grid layout for dropdown content */
+.dropdownContent {
+  min-width: 220px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Animation classes for dropdown items */
+.dropdownContent.right > * {
+  animation: slideFromRight 0.3s ease forwards;
+}
+
+.dropdownContent.left > * {
+  animation: slideFromLeft 0.3s ease forwards;
+}
+
+/* Dropdown animations */
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Individual dropdown item styling */
+.dropdownItem {
+  display: block;
+  padding: 1rem;
+  color: #4a4a4a;
+  text-decoration: none;
+  font-size: 13px;
+  transition: background-color 0.2s ease;
+  border-radius: 8px;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+/* Dropdown text styling */
+.dropdownTitle {
+  font-size: 13px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.dropdownDescription {
+  font-size: 12px;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+/* Staggered animation delays for dropdown items */
+
+.dropdownContent > *:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.dropdownContent > *:nth-child(2) {
+  animation-delay: 0.05s;
+}
+
+.dropdownContent > *:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+.dropdownContent > *:nth-child(4) {
+  animation-delay: 0.15s;
+}
+
+.dropdownContent > *:nth-child(5) {
+  animation-delay: 0.2s;
+}
+
+.dropdownContent > *:nth-child(6) {
+  animation-delay: 0.25s;
+}
+
+.dropdownContent > *:nth-child(7) {
+  animation-delay: 0.3s;
+}
+
+.dropdownContent > *:nth-child(8) {
+  animation-delay: 0.35s;
+}
+
+.dropdownContent > *:nth-child(9) {
+  animation-delay: 0.4s;
+}
+
+.dropdownItem:last-child {
+  margin-bottom: 0;
+}
+
+.dropdownItem:hover {
+  background-color: #f5f5f5;
+}
+
+/* Action buttons styling */
+.actionButtons {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  margin-left: auto;
+}
+
+.quoteBtn {
+  text-decoration: none;
+  color: white;
+  background-color: #0066ff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.quoteBtn:hover {
+  background-color: #0052cc;
+}
+
+/* Mobile buttons container */
+.mobileButtons {
+  position: sticky;
+  bottom: 0;
+  padding: 1.5rem;
+  background-color: white;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mobile quote button specific styles */
+.mobileButtons .quoteBtn {
+  width: 80%;
+  padding: 0.8rem;
+  font-size: 16px;
+  font-weight: 600;
+}
+
 .hamburger {
   display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 4px;
-  background: transparent;
   border: none;
+  background: none;
   cursor: pointer;
-  padding: 8px;
-  z-index: 51;
+  padding: 0.5rem;
+  color: #333;
+  z-index: 9999;
+  margin-left: 1rem;
 }
 
-.hamburger span {
-  display: block;
-  width: 24px;
-  height: 2px;
-  background-color: #2563eb;
-  transition: all 0.3s ease;
+.hamburger.open {
+  color: #333;
 }
 
-/* Mobile Menu */
+/* Mobile menu styling */
 .mobileMenu {
   display: none;
   position: fixed;
   top: 70px;
   left: 0;
-  width: 100%;
+  right: 0;
+  bottom: 0;
   background-color: white;
   padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transform: translateY(-100%);
-  opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 49;
+  overflow-y: auto;
+  z-index: 998;
 }
 
-.mobileMenu.active {
-  transform: translateY(0);
-  opacity: 1;
+.mobileMenu.open {
+  display: block;
 }
 
-.mobileNavLinks {
+/* Mobile navigation links */
+.mobileNavLink {
   display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem 0;
-}
-
-.mobileLink {
-  color: #4b5563;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  color: #4a4a4a;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
   text-decoration: none;
-  font-size: 1rem;
-  padding: 0.75rem 0;
-  border-bottom: 1px solid #e5e7eb;
-  transition: color 0.2s;
 }
 
-.mobileLink:hover {
-  color: #2563eb;
+/* Mobile dropdown container */
+.mobileDropdownContainer {
+  border-bottom: 1px solid #f0f0f0;
 }
 
-/* Mobile Specific Styles */
-@media (max-width: 768px) {
-  .navLinks {
+/* Mobile dropdown menu */
+.mobileDropdown {
+  background-color: #f8f8f8;
+  padding: 0.5rem 1rem;
+}
+
+/* Mobile dropdown items */
+.mobileDropdownItem {
+  display: block;
+  padding: 1rem;
+  color: #4a4a4a;
+  text-decoration: none;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.mobileDropdownItem:last-child {
+  border-bottom: none;
+}
+
+/* Mobile action buttons */
+.mobileButtons {
+  position: sticky;
+  bottom: 0;
+  padding: 1rem;
+  background-color: white;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 1rem;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  .navbar {
+    padding: 0 2rem;
+  }
+
+  .navLinksWrapper {
     display: none;
   }
-  
-  .connect {
+
+  .actionButtons {
     display: none;
   }
-  
+
   .hamburger {
-    display: flex;
-  }
-  
-  .mobileMenu {
     display: block;
   }
 
-  /* Ensure logo and hamburger are visible and properly spaced */
-  .container {
+  .navbarContent {
     justify-content: space-between;
+  }
+}
+
+@media (min-width: 1201px) {
+  .mobileMenu {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 1rem;
   }
 
   .logo {
-    font-size: 1.1rem; /* Slightly smaller on mobile */
+    width: 100px;
   }
 
-  /* Mobile Menu Quote Button */
-  .mobileMenu .quoteButton {
-    margin-top: 1rem;
-    width: 100%; /* Full width only in mobile menu */
-    justify-content: center;
-  }
-}
-
-/* Hamburger Animation */
-.hamburger.active span:first-child {
-  transform: translateY(6px) rotate(45deg);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:last-child {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-/* Tablet Styles */
-@media (min-width: 769px) and (max-width: 1024px) {
-  .navLinks {
-    gap: 1.5rem;
-  }
-  
-  .link, .contact, .quoteButton {
-    font-size: 0.9rem;
+  .quoteBtn {
+    font-size: 12px;
+    padding: 0.3rem 0.6rem;
   }
 }
