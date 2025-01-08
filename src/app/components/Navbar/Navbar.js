@@ -40,7 +40,7 @@ const Navbar = () => {
                 description: 'Building dynamic and responsive web apps'
             },
             {
-                title: 'IOS/ Android App Development',
+                title: 'IOS/Android App Development',
                 description: 'Developing high-quality apps for mobile platforms'
             },
             {
@@ -182,8 +182,12 @@ const Navbar = () => {
                                     <div className={`${styles.dropdownContent} ${styles[animationDirection]}`}>
                                         {dropdownContent.services.map((item) => (
                                             <Link
-                                                key={item.title}
-                                                href={`/services/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                            key={item.title}
+                                            href={`/services/${item.title
+                                                .toLowerCase() // Convert to lowercase
+                                                .replace(/\s+/g, '-') // Replace spaces with hyphens
+                                                .replace(/[^\w-]/g, '') // Remove special characters except hyphens
+                                            }`}
                                                 className={styles.dropdownItem}
                                             >
                                                 <div className={styles.dropdownTitle}>{item.title}</div>
