@@ -137,3 +137,24 @@
     width: 100%;
   }
 }
+
+@media (max-width: 468px) {
+  .sidebar ul {
+    display: none;
+    margin-bottom: 0;
+  }
+
+  .main-content {
+    margin-top: 0;
+  }
+
+  .blog-container {
+    gap: 20px;
+    border: none;
+    padding-top: 2px;
+  }
+
+  /* .share-icons p {
+    display: none;
+  } */
+}
