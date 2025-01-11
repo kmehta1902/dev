@@ -155,8 +155,8 @@ const Navbar = () => {
                         <Image
                             src="/logo.png"
                             alt="Company Logo"
-                            width={160}
-                            height={45}
+                            width={170}
+                            height={50}
                             priority
                             className={styles.logo}
                         />
@@ -211,9 +211,13 @@ const Navbar = () => {
                                     <div className={`${styles.dropdownContent} ${styles[animationDirection]}`}>
                                         {dropdownContent.products.map((item) => (
                                             <Link
-                                                key={item.title}
-                                                href={`/products/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                                className={styles.dropdownItem}
+                                            key={item.title}
+                                            href={`/Products/${item.title
+                                                .toLowerCase() // Convert to lowercase
+                                                .replace(/\s+/g, '-') // Replace spaces with hyphens
+                                                .replace(/[^\w-]/g, '') // Remove special characters except hyphens
+                                            }`}
+                                            className={styles.dropdownItem}
                                             >
                                                 <div className={styles.dropdownTitle}>{item.title}</div>
                                                 <div className={styles.dropdownDescription}>{item.description}</div>
@@ -224,7 +228,7 @@ const Navbar = () => {
                             )}
                         </div>
 
-                        <Link href="/portfolio" className={styles.navLink}>
+                        <Link href="/Portfolio" className={styles.navLink}>
                             Portfolio
                         </Link>
 
@@ -240,9 +244,13 @@ const Navbar = () => {
                                     <div className={`${styles.dropdownContent} ${styles[animationDirection]}`}>
                                         {dropdownContent.industries.map((item) => (
                                             <Link
-                                                key={item.title}
-                                                href={`/industries/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                                className={styles.dropdownItem}
+                                            key={item.title}
+                                            href={`/Industries/${item.title
+                                                .toLowerCase() // Convert to lowercase
+                                                .replace(/\s+/g, '-') // Replace spaces with hyphens
+                                                .replace(/[^\w-]/g, '') // Remove special characters except hyphens
+                                            }`}
+                                            className={styles.dropdownItem}
                                             >
                                                 <div className={styles.dropdownTitle}>{item.title}</div>
                                                 <div className={styles.dropdownDescription}>{item.description}</div>
@@ -265,9 +273,13 @@ const Navbar = () => {
                                     <div className={`${styles.dropdownContent} ${styles[animationDirection]}`}>
                                         {dropdownContent.company.map((item) => (
                                             <Link
-                                                key={item.title}
-                                                href={`/company/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                                className={styles.dropdownItem}
+                                            key={item.title}
+                                            href={`/Company/${item.title
+                                                .toLowerCase() // Convert to lowercase
+                                                .replace(/\s+/g, '-') // Replace spaces with hyphens
+                                                .replace(/[^\w-]/g, '') // Remove special characters except hyphens
+                                            }`}
+                                            className={styles.dropdownItem}
                                             >
                                                 <div className={styles.dropdownTitle}>{item.title}</div>
                                                 <div className={styles.dropdownDescription}>{item.description}</div>
