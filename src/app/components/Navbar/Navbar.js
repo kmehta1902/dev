@@ -328,8 +328,12 @@ const Navbar = () => {
                                 <div className={styles.mobileDropdown}>
                                     {dropdownContent.services.map((item) => (
                                         <Link
-                                            key={item.title}
-                                            href={`/services/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                        key={item.title}
+                                        href={`/Services/${item.title
+                                            .toLowerCase() // Convert to lowercase
+                                            .replace(/\s+/g, '-') // Replace spaces with hyphens
+                                            .replace(/[^\w-]/g, '') // Remove special characters except hyphens
+                                        }`}
                                             className={styles.mobileDropdownItem}
                                         >
                                             <div className={styles.dropdownTitle}>{item.title}</div>
@@ -353,8 +357,12 @@ const Navbar = () => {
                                 <div className={styles.mobileDropdown}>
                                     {dropdownContent.products.map((item) => (
                                         <Link
-                                            key={item.title}
-                                            href={`/products/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                        key={item.title}
+                                        href={`/Products/${item.title
+                                            .toLowerCase() // Convert to lowercase
+                                            .replace(/\s+/g, '-') // Replace spaces with hyphens
+                                            .replace(/[^\w-]/g, '') // Remove special characters except hyphens
+                                        }`}
                                             className={styles.mobileDropdownItem}
                                         >
                                             <div className={styles.dropdownTitle}>{item.title}</div>
@@ -365,7 +373,7 @@ const Navbar = () => {
                             )}
                         </div>
 
-                        <Link href="/portfolio" className={styles.mobileNavLink}>
+                        <Link href="/Portfolio" className={styles.mobileNavLink}>
                             Portfolio
                         </Link>
 
@@ -382,8 +390,12 @@ const Navbar = () => {
                                 <div className={styles.mobileDropdown}>
                                     {dropdownContent.industries.map((item) => (
                                         <Link
-                                            key={item.title}
-                                            href={`/industries/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                        key={item.title}
+                                        href={`/Industries/${item.title
+                                            .toLowerCase() // Convert to lowercase
+                                            .replace(/\s+/g, '-') // Replace spaces with hyphens
+                                            .replace(/[^\w-]/g, '') // Remove special characters except hyphens
+                                        }`}
                                             className={styles.mobileDropdownItem}
                                         >
                                             <div className={styles.dropdownTitle}>{item.title}</div>
@@ -407,8 +419,12 @@ const Navbar = () => {
                                 <div className={styles.mobileDropdown}>
                                     {dropdownContent.company.map((item) => (
                                         <Link
-                                            key={item.title}
-                                            href={`/company/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                        key={item.title}
+                                        href={`/Company/${item.title
+                                            .toLowerCase() // Convert to lowercase
+                                            .replace(/\s+/g, '-') // Replace spaces with hyphens
+                                            .replace(/[^\w-]/g, '') // Remove special characters except hyphens
+                                        }`}
                                             className={styles.mobileDropdownItem}
                                         >
                                             <div className={styles.dropdownTitle}>{item.title}</div>
