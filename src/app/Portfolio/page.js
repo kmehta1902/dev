@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from './Portfolio.module.css';
@@ -20,7 +20,8 @@ import {
   Building2,
 } from 'lucide-react';
 
-export default function Portfolio() {
+// Separate the main content into a new component
+function PortfolioContent() {
   const searchParams = useSearchParams();
   const [activeFilter, setActiveFilter] = useState('All Projects');
   const [isPaused, setIsPaused] = useState(false);
@@ -103,14 +104,13 @@ export default function Portfolio() {
       ? projects
       : projects.filter((project) => project.type === activeFilter);
 
-  // Auto-scroll functionality
   useEffect(() => {
     if (!isPaused && filteredProjects.length > 3) {
       scrollInterval.current = setInterval(() => {
         setCurrentIndex((prevIndex) =>
           prevIndex + 1 >= filteredProjects.length ? 0 : prevIndex + 1
         );
-      }, 3000); // Scroll every 3 seconds
+      }, 3000);
     }
     return () => {
       if (scrollInterval.current) {
@@ -119,7 +119,6 @@ export default function Portfolio() {
     };
   }, [isPaused, filteredProjects.length]);
 
-  // Reset current index when filter changes
   useEffect(() => {
     setCurrentIndex(0);
   }, [activeFilter]);
@@ -256,5 +255,20 @@ export default function Portfolio() {
       <ContactForm />
       <Footer />
     </div>
+  );
+}
+
+// Main Portfolio component with Suspense boundary
+export default function Portfolio() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold">Loading Portfolio...</h2>
+        </div>
+      </div>
+    }>
+      <PortfolioContent />
+    </Suspense>
   );
 }

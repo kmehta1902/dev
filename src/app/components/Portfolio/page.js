@@ -4,7 +4,6 @@ import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from './Portfolio.module.css';
-
 import { motion } from 'framer-motion';
 import {
   ShoppingCart,
@@ -15,76 +14,113 @@ import {
   Building2,
 } from 'lucide-react';
 
+// Move projects array outside the component since it's static
+const projects = [
+  {
+    id: 1,
+    name: 'E-Commerce Platform',
+    type: 'Web Applications',
+    color: 'blue',
+    description:
+      'A full-featured online shopping platform with advanced inventory management',
+    Icon: ShoppingCart,
+  },
+  {
+    id: 2,
+    name: 'Healthcare App',
+    type: 'Mobile Apps',
+    color: 'purple',
+    description:
+      'A comprehensive app designed to improve patient care and hospital efficiency',
+    Icon: Stethoscope,
+  },
+  {
+    id: 3,
+    name: 'CRM System',
+    type: 'Enterprise Software',
+    color: 'pink',
+    description:
+      'An advanced customer relationship management system for businesses',
+    Icon: Users,
+  },
+  {
+    id: 4,
+    name: 'Fintech Solution',
+    type: 'Enterprise Software',
+    color: 'green',
+    description:
+      'A secure and scalable platform for modern financial services',
+    Icon: LineChart,
+  },
+  {
+    id: 5,
+    name: 'IoT Dashboard',
+    type: 'Web Applications',
+    color: 'orange',
+    description:
+      'A dashboard for monitoring IoT devices with real-time analytics',
+    Icon: Gauge,
+  },
+  {
+    id: 6,
+    name: 'ERP System',
+    type: 'Enterprise Software',
+    color: 'indigo',
+    description:
+      'A robust enterprise resource planning system for large-scale businesses',
+    Icon: Building2,
+  },
+];
+
+const productFilterMap = {
+  lms: 'Enterprise Solutions',
+  erp: 'Enterprise Solutions',
+  crm: 'Mobile Apps',
+  'e-commerce': 'Web Applications',
+};
+
+// Split into smaller components for better organization
+function ProjectCard({ project, index }) {
+  const Icon = project.Icon;
+  return (
+    <motion.div
+      key={`${project.id}-${index}`}
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -100 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Link
+        href={`/Portfolio/${project.id}`}
+        className={styles.projectCard}
+      >
+        <div
+          className={`${styles.projectCard} ${
+            styles[project.color] || ''
+          }`}
+        >
+          <div className={styles.cardHeader}>
+            <Icon className={styles.projectIcon} size={24} />
+            <h3 className={styles.projectTitle}>{project.name}</h3>
+          </div>
+          <div className={styles.cardOverlay}>
+            <p className={styles.projectDescription}>
+              {project.description}
+            </p>
+            <span className={styles.caseStudyLink}>Read More →</span>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
 function PortfolioContent() {
   const searchParams = useSearchParams();
   const [activeFilter, setActiveFilter] = useState('All Projects');
   const [isPaused, setIsPaused] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollInterval = useRef(null);
-
-  const productFilterMap = {
-    lms: 'Enterprise Solutions',
-    erp: 'Enterprise Solutions',
-    crm: 'Mobile Apps',
-    'e-commerce': 'Web Applications',
-  };
-
-  const projects = [
-    {
-      id: 1,
-      name: 'E-Commerce Platform',
-      type: 'Web Applications',
-      color: 'blue',
-      description:
-        'A full-featured online shopping platform with advanced inventory management',
-      Icon: ShoppingCart,
-    },
-    {
-      id: 2,
-      name: 'Healthcare App',
-      type: 'Mobile Apps',
-      color: 'purple',
-      description:
-        'A comprehensive app designed to improve patient care and hospital efficiency',
-      Icon: Stethoscope,
-    },
-    {
-      id: 3,
-      name: 'CRM System',
-      type: 'Enterprise Software',
-      color: 'pink',
-      description:
-        'An advanced customer relationship management system for businesses',
-      Icon: Users,
-    },
-    {
-      id: 4,
-      name: 'Fintech Solution',
-      type: 'Enterprise Software',
-      color: 'green',
-      description:
-        'A secure and scalable platform for modern financial services',
-      Icon: LineChart,
-    },
-    {
-      id: 5,
-      name: 'IoT Dashboard',
-      type: 'Web Applications',
-      color: 'orange',
-      description:
-        'A dashboard for monitoring IoT devices with real-time analytics',
-      Icon: Gauge,
-    },
-    {
-      id: 6,
-      name: 'ERP System',
-      type: 'Enterprise Software',
-      color: 'indigo',
-      description:
-        'A robust enterprise resource planning system for large-scale businesses',
-      Icon: Building2,
-    },
-  ];
 
   useEffect(() => {
     const productType = searchParams.get('type');
@@ -98,14 +134,13 @@ function PortfolioContent() {
       ? projects
       : projects.filter((project) => project.type === activeFilter);
 
-  // Auto-scroll functionality
   useEffect(() => {
     if (!isPaused && filteredProjects.length > 3) {
       scrollInterval.current = setInterval(() => {
         setCurrentIndex((prevIndex) =>
           prevIndex + 1 >= filteredProjects.length ? 0 : prevIndex + 1
         );
-      }, 3000); // Scroll every 3 seconds
+      }, 3000);
     }
     return () => {
       if (scrollInterval.current) {
@@ -114,7 +149,6 @@ function PortfolioContent() {
     };
   }, [isPaused, filteredProjects.length]);
 
-  // Reset current index when filter changes
   useEffect(() => {
     setCurrentIndex(0);
   }, [activeFilter]);
@@ -132,88 +166,58 @@ function PortfolioContent() {
   };
 
   return (
-    <div>
-      <section id="portfolio" className={styles.portfolio}>
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <h2 className={styles.title}>Our Portfolio</h2>
-            <p className={styles.description}>
-              Explore our successful projects that showcase our expertise in
-              delivering innovative solutions.
-            </p>
-          </div>
-          <div className={styles.filters}>
-            {[
-              'All Projects',
-              'Web Applications',
-              'Mobile Apps',
-              'Enterprise Software',
-            ].map((filter) => (
-              <button
-                key={filter}
-                className={`${styles.filterButton} ${
-                  activeFilter === filter ? styles.active : ''
-                }`}
-                onClick={() => setActiveFilter(filter)}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-          <motion.div
-            className={styles.grid}
-            onHoverStart={() => setIsPaused(true)}
-            onHoverEnd={() => setIsPaused(false)}
-            onClick={() => setIsPaused(true)}
-          >
-            {getVisibleProjects().map((project, index) => {
-              const Icon = project.Icon;
-              return (
-                <motion.div
-                  key={`${project.id}-${index}`}
-                  initial={{ opacity: 0, x: 100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -100 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <Link
-                    href={`/Portfolio/${project.id}`}
-                    className={styles.projectCard}
-                  >
-                    <div
-                      className={`${styles.projectCard} ${
-                        styles[project.color] || ''
-                      }`}
-                    >
-                      <div className={styles.cardHeader}>
-                        <Icon className={styles.projectIcon} size={24} />
-                        <h3 className={styles.projectTitle}>
-                          {project.name}
-                        </h3>
-                      </div>
-                      <div className={styles.cardOverlay}>
-                        <p className={styles.projectDescription}>
-                          {project.description}
-                        </p>
-                        <span className={styles.caseStudyLink}>
-                          Read More →
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </motion.div>
+    <section id="portfolio" className={styles.portfolio}>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <h2 className={styles.title}>Our Portfolio</h2>
+          <p className={styles.description}>
+            Explore our successful projects that showcase our expertise in
+            delivering innovative solutions.
+          </p>
         </div>
-      </section>
-    </div>
+        <div className={styles.filters}>
+          {[
+            'All Projects',
+            'Web Applications',
+            'Mobile Apps',
+            'Enterprise Software',
+          ].map((filter) => (
+            <button
+              key={filter}
+              className={`${styles.filterButton} ${
+                activeFilter === filter ? styles.active : ''
+              }`}
+              onClick={() => setActiveFilter(filter)}
+            >
+              {filter}
+            </button>
+          ))}
+        </div>
+        <motion.div
+          className={styles.grid}
+          onHoverStart={() => setIsPaused(true)}
+          onHoverEnd={() => setIsPaused(false)}
+          onClick={() => setIsPaused(true)}
+        >
+          {getVisibleProjects().map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
+          ))}
+        </motion.div>
+      </div>
+    </section>
   );
 }
 
+// Wrap the default export with Suspense
 export default function Portfolio() {
   return (
-    <Suspense fallback={<div>Loading Portfolio...</div>}>
+    <Suspense 
+      fallback={
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="text-center">Loading Portfolio...</div>
+        </div>
+      }
+    >
       <PortfolioContent />
     </Suspense>
   );
