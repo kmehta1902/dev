@@ -159,7 +159,7 @@ const Testimonials = () => {
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
+        // onMouseLeave={handleMouseUp}
         onTouchStart={(e) => {
           stopAutoScroll();
           onTouchStart(e);
