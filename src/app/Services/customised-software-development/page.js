@@ -119,7 +119,7 @@ const CustomSoftwarePage = () => {
           <h1>Custom Software Development</h1>
           <p>Transform your business with tailor-made software solutions that drive innovation, efficiency, and growth</p>
           <div className={styles.ctaButtons}>
-            <Link href="/contact">
+            <Link href="/GetaQuote">
               <button className={styles.primaryBtn}>Schedule Consultation</button>
             </Link>
             <Link href="/Portfolio">
