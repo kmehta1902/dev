@@ -1,5 +1,6 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from './Portfolio.module.css';
@@ -14,7 +15,7 @@ import {
   Building2,
 } from 'lucide-react';
 
-export default function Portfolio() {
+function PortfolioContent() {
   const searchParams = useSearchParams();
   const [activeFilter, setActiveFilter] = useState('All Projects');
   const [isPaused, setIsPaused] = useState(false);
@@ -132,7 +133,6 @@ export default function Portfolio() {
 
   return (
     <div>
-    
       <section id="portfolio" className={styles.portfolio}>
         <div className={styles.container}>
           <div className={styles.header}>
@@ -207,7 +207,14 @@ export default function Portfolio() {
           </motion.div>
         </div>
       </section>
-     
     </div>
+  );
+}
+
+export default function Portfolio() {
+  return (
+    <Suspense fallback={<div>Loading Portfolio...</div>}>
+      <PortfolioContent />
+    </Suspense>
   );
 }
