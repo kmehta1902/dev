@@ -22,18 +22,81 @@ const QuoteForm = () => {
   });
 
   const [currentStep, setCurrentStep] = useState(1); // Tracks the current step
+  const [errors, setErrors] = useState({}); // Track error messages
 
   const handleNext = () => {
-    setCurrentStep((prev) => Math.min(prev + 1, 4)); // Move to the next step
+    if (validateStep(currentStep)) {
+      setCurrentStep((prev) => Math.min(prev + 1, 4)); // Move to the next step
+    }
   };
 
   const handleBack = () => {
     setCurrentStep((prev) => Math.max(prev - 1, 1)); // Move to the previous step
   };
 
+  const validateStep = (step) => {
+    let valid = true;
+    let newErrors = {};
+
+    // Step 1: Personal details validation
+    if (step === 1) {
+      if (!formData.fullName) {
+        newErrors.fullName = 'Full Name is required';
+        valid = false;
+      }
+      if (!formData.email) {
+        newErrors.email = 'Email is required';
+        valid = false;
+      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+        newErrors.email = 'Please enter a valid email address';
+        valid = false;
+      }
+      if (!formData.phone) {
+        newErrors.phone = 'Phone number is required';
+        valid = false;
+      } else if (!/^\+?[1-9]\d{1,14}$/.test(formData.phone)) {
+        newErrors.phone = 'Please enter a valid phone number';
+        valid = false;
+      }
+    }
+
+    // Step 2: Service selection validation
+    if (step === 2) {
+      const servicesSelected = Object.values(formData.services).some((service) => service);
+      if (!servicesSelected) {
+        newErrors.services = 'At least one service must be selected';
+        valid = false;
+      }
+    }
+
+    // Step 3: Budget and Timeline validation
+    if (step === 3) {
+      if (!formData.projectBudget) {
+        newErrors.projectBudget = 'Project Budget is required';
+        valid = false;
+      }
+      if (!formData.projectTimeline) {
+        newErrors.projectTimeline = 'Project Timeline is required';
+        valid = false;
+      }
+    }
+
+    // Step 4: Project description validation
+    if (step === 4 && !formData.projectDescription) {
+      newErrors.projectDescription = 'Project Description is required';
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
+    if (validateStep(currentStep)) {
+      console.log('Form Data:', formData);
+      // Proceed with form submission (e.g., send to an API or email)
+    }
   };
 
   const renderStep = () => {
@@ -52,6 +115,7 @@ const QuoteForm = () => {
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
                 />
+                {errors.fullName && <span className={styles.errorText}>{errors.fullName}</span>}
               </div>
               <div>
                 <label className={styles.formField}>Company Name</label>
@@ -72,6 +136,7 @@ const QuoteForm = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
+                {errors.email && <span className={styles.errorText}>{errors.email}</span>}
               </div>
               <div>
                 <label className={styles.formField}>Phone Number *</label>
@@ -82,6 +147,7 @@ const QuoteForm = () => {
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 />
+                {errors.phone && <span className={styles.errorText}>{errors.phone}</span>}
               </div>
             </div>
           </div>
@@ -108,6 +174,7 @@ const QuoteForm = () => {
                 </label>
               ))}
             </div>
+            {errors.services && <span className={styles.errorText}>{errors.services}</span>}
           </div>
         );
       case 3:
@@ -119,7 +186,7 @@ const QuoteForm = () => {
                 ['5000-10000', '$5,000 - $10,000'],
                 ['10000-25000', '$10,000 - $25,000'],
                 ['25000+', '$25,000+'],
-                ["Other","Other"]
+                ['Other', 'Other'],
               ].map(([value, label]) => (
                 <label key={value} className={styles.radioLabel}>
                   <input
@@ -134,6 +201,8 @@ const QuoteForm = () => {
                 </label>
               ))}
             </div>
+            {errors.projectBudget && <span className={styles.errorText}>{errors.projectBudget}</span>}
+
             <h2 className={styles.sectionTitle}>Project Timeline</h2>
             <div className={styles.budgetGrid}>
               {[
@@ -154,6 +223,7 @@ const QuoteForm = () => {
                 </label>
               ))}
             </div>
+            {errors.projectTimeline && <span className={styles.errorText}>{errors.projectTimeline}</span>}
           </div>
         );
       case 4:
@@ -166,6 +236,7 @@ const QuoteForm = () => {
               value={formData.projectDescription}
               onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
             />
+            {errors.projectDescription && <span className={styles.errorText}>{errors.projectDescription}</span>}
             <p>* We'll get back to you within 24 hours with a detailed quote.*</p>
           </div>
         );
@@ -175,50 +246,40 @@ const QuoteForm = () => {
   };
 
   return (
-    
-   
-    
-    <section id='quoteform' className={styles.quoteContainer}>
+    <section id="quoteform" className={styles.quoteContainer}>
       <h1 className={styles.title}>Get a Free Quote</h1>
       <p className={styles.subbtitle}>
         Share your project details with us, and we'll provide you with a comprehensive proposal
       </p>
       <div className={styles.ccontainer}>
-      <div className={styles.animation}>
-      <video width="100%" height="100%"  autoPlay loop muted playsInline>
-      <source src="/vecteezy_user-profile-in-a-phone-animated-footage_46548580.mp4" type="video/mp4" />
-     
-     
-    </video>
+        <div className={styles.animation}>
+          <video width="100%" height="100%" autoPlay loop muted playsInline>
+            <source src="/vecteezy_user-profile-in-a-phone-animated-footage_46548580.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div className={styles.formContainer}>
+          <form onSubmit={handleSubmit} className={styles.formSection}>
+            {renderStep()}
+            <div className={styles.submitContainer}>
+              {currentStep > 1 && (
+                <button type="button" className={styles.submitButton} onClick={handleBack}>
+                  Back
+                </button>
+              )}
+              {currentStep < 4 ? (
+                <button type="button" className={styles.submitButton} onClick={handleNext}>
+                  Next
+                </button>
+              ) : (
+                <button type="submit" className={styles.submitButton}>
+                  Get Your Free Quote
+                </button>
+              )}
+            </div>
+          </form>
+        </div>
       </div>
-      <div className={styles.formContainer}>
-        <form onSubmit={handleSubmit} className={styles.formSection}>
-          {renderStep()}
-          <div className={styles.submitContainer}>
-            {currentStep > 1 && (
-              <button type="button" className={styles.submitButton} onClick={handleBack}>
-                Back
-              </button>
-            )}
-            {currentStep < 4 ? (
-              <button type="button" className={styles.submitButton} onClick={handleNext}>
-                Next
-              </button>
-            ) : (
-              <button type="submit" className={styles.submitButton}>
-                "Get Your Free Quote"
-              </button>
-              
-            )
-            
-            }
-          </div>
-        </form>
-      </div>
-      </div>
-   
     </section>
-    
   );
 };
 

@@ -38,13 +38,13 @@ const ServiceDetailPage = ({
     <div>
         <Navbar />
     <div className={styles.container}>
-      {/* Hero Section */}
-      {/* <section className={styles.hero}> */}
+      {/* Hero Section  */}
+      <section className={styles.hero}>
         <div className={styles.heroContent}> 
           <h1 className={styles.heroTitle}>{title}</h1>
           <p className={styles.heroDescription}>{description}</p>
         </div>
-    {/* //   </section> */}
+    </section> 
 
       {/* Features Section */}
       <section className={`${styles.section} ${styles.fadeIn}`}>
@@ -102,7 +102,7 @@ const ServiceDetailPage = ({
       </section>
 
       {/* CTA Section */}
-      {/* <section className={`${styles.ctaSection} ${styles.fadeIn}`}>
+      <section className={`${styles.ctaSection} ${styles.fadeIn}`}>
         <h2 className={styles.ctaTitle}>Ready to Transform Your Business?</h2>
         <p className={styles.ctaDescription}>
           Let's discuss how our {title} can help you achieve your goals.
@@ -111,7 +111,7 @@ const ServiceDetailPage = ({
           Contact Us Now
           <ArrowRight className={styles.buttonIcon} />
         </button>
-      </section> */}
+      </section>
     </div>
     <Testimonials />
                 <Blog />

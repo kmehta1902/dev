@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useState } from 'react';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import styles from './ContactForm.module.css';
@@ -10,17 +10,59 @@ const ContactForm = () => {
     subject: '',
     message: '',
   });
+  
+  const [errors, setErrors] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const validateForm = () => {
+    let valid = true;
+    let newErrors = {};
+
+    // Check if fields are filled out
+    if (!formData.name) {
+      newErrors.name = 'Name is required';
+      valid = false;
+    }
+
+    if (!formData.email) {
+      newErrors.email = 'Email is required';
+      valid = false;
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email address is invalid';
+      valid = false;
+    }
+
+    if (!formData.subject) {
+      newErrors.subject = 'Subject is required';
+      valid = false;
+    }
+
+    if (!formData.message) {
+      newErrors.message = 'Message is required';
+      valid = false;
+    }
+
+    setErrors(newErrors);
+    return valid;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
+    if (validateForm()) {
+      console.log(formData);
+      // Proceed with form submission (e.g., send to an API or email)
+    }
   };
 
   return (
     <section id="contactform" className={styles.contactContainer}>
       <h1>Contact Us</h1>
       <p>Get in touch with us for any inquiries or support. We're here to help you succeed.</p>
-      
+
       <div className={styles.contactGrid}>
         <div className={styles.contactInfo}>
           {/* Contact Info Boxes */}
@@ -88,6 +130,7 @@ const ContactForm = () => {
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               required
             />
+            {errors.name && <span style={{ color: 'red', fontSize: '0.875rem' }}>{errors.name}</span>}
           </div>
 
           <div className={styles.formGroup}>
@@ -99,6 +142,7 @@ const ContactForm = () => {
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               required
             />
+            {errors.email && <span style={{ color: 'red', fontSize: '0.875rem' }}>{errors.email}</span>}
           </div>
 
           <div className={styles.formGroup}>
@@ -110,6 +154,7 @@ const ContactForm = () => {
               onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
               required
             />
+            {errors.subject && <span style={{ color: 'red', fontSize: '0.875rem' }}>{errors.subject}</span>}
           </div>
 
           <div className={styles.formGroup}>
@@ -121,6 +166,7 @@ const ContactForm = () => {
               required
               rows={4}
             />
+            {errors.message && <span style={{ color: 'red', fontSize: '0.875rem' }}>{errors.message}</span>}
           </div>
 
           <button type="submit" className={styles.submitButton}>
