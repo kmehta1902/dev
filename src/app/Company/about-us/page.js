@@ -15,7 +15,7 @@ export default function Home() {
 
             <main>
                 <Navbar />
-                {/* <SplashCursor /> */}
+                 {/* <SplashCursor />  */}
 
                 <Testimonials />
                 <Blog />
