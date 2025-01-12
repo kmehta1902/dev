@@ -156,9 +156,9 @@ const LatestInsights = () => {
             const newIndex = Math.round(scrollPosition / cardWidth);
             
             // Reset position when reaching the second set of cloned items
-            if (scrollPosition >= ((posts.length * 2) * cardWidth)) {
-                container.scrollLeft = scrollPosition - (posts.length * cardWidth);
-            }
+            // if (scrollPosition >= ((posts.length * 2) * cardWidth)) {
+            //     container.scrollLeft = scrollPosition - (posts.length * cardWidth);
+            // }
             
             setCurrentIndex(newIndex % posts.length);
         }
