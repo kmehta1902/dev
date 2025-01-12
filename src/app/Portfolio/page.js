@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from './Portfolio.module.css';
@@ -20,7 +20,8 @@ import {
   Building2,
 } from 'lucide-react';
 
-export default function Portfolio() {
+// Separate the main content into a new component
+function PortfolioContent() {
   const searchParams = useSearchParams();
   const [activeFilter, setActiveFilter] = useState('All Projects');
   const [isPaused, setIsPaused] = useState(false);
@@ -103,14 +104,13 @@ export default function Portfolio() {
       ? projects
       : projects.filter((project) => project.type === activeFilter);
 
-  // Auto-scroll functionality
   useEffect(() => {
     if (!isPaused && filteredProjects.length > 3) {
       scrollInterval.current = setInterval(() => {
         setCurrentIndex((prevIndex) =>
           prevIndex + 1 >= filteredProjects.length ? 0 : prevIndex + 1
         );
-      }, 3000); // Scroll every 3 seconds
+      }, 3000);
     }
     return () => {
       if (scrollInterval.current) {
@@ -119,7 +119,6 @@ export default function Portfolio() {
     };
   }, [isPaused, filteredProjects.length]);
 
-  // Reset current index when filter changes
   useEffect(() => {
     setCurrentIndex(0);
   }, [activeFilter]);
@@ -139,13 +138,49 @@ export default function Portfolio() {
   return (
     <div>
       <Navbar />
+      
+      {/* Hero Section */}
+      <section
+        style={{
+          background: 'linear-gradient(to right, #3b82f6, #9333ea)',
+          color: 'white',
+          padding: '80px 0',
+          textAlign: 'center',
+        }}
+      >
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <h1 style={{ fontSize: '3rem', fontWeight: '800', marginBottom: '20px' }}>
+            Transforming Ideas Into Real Solutions
+          </h1>
+          <p style={{ fontSize: '1.125rem', marginBottom: '30px' }}>
+            Explore our innovative projects designed to revolutionize industries and enhance user experiences.
+          </p>
+          <Link href="#portfolio">
+            <button
+              style={{
+                backgroundColor: 'white',
+                color: '#2563eb',
+                padding: '12px 24px',
+                borderRadius: '9999px',
+                fontSize: '1.125rem',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+                border: 'none',
+              }}
+            >
+              View Our Work
+            </button>
+          </Link>
+        </div>
+      </section>
+
+      {/* Portfolio Section */}
       <section id="portfolio" className={styles.portfolio}>
         <div className={styles.container}>
           <div className={styles.header}>
             <h2 className={styles.title}>Our Portfolio</h2>
             <p className={styles.description}>
-              Explore our successful projects that showcase our expertise in
-              delivering innovative solutions.
+              Explore our successful projects that showcase our expertise in delivering innovative solutions.
             </p>
           </div>
           <div className={styles.filters}>
@@ -213,11 +248,27 @@ export default function Portfolio() {
           </motion.div>
         </div>
       </section>
+
       <Testimonials />
       <Blog />
       <QuoteForm />
       <ContactForm />
       <Footer />
     </div>
+  );
+}
+
+// Main Portfolio component with Suspense boundary
+export default function Portfolio() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="text-center">
+          <h2 className="text-xl font-semibold">Loading Portfolio...</h2>
+        </div>
+      </div>
+    }>
+      <PortfolioContent />
+    </Suspense>
   );
 }

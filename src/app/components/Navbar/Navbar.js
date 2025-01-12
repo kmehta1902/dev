@@ -108,6 +108,11 @@ const Navbar = () => {
             {
                 title: "Career",
                 description: "Explore exciting career opportunities with our team"
+            },
+            {
+                title: "Blog",
+            description: "Stay updated with our latest insights, industry trends, and company news"
+
             }
         ]
     };

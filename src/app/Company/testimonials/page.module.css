@@ -1,0 +1,230 @@
+.pageContainer {
+  width: 95%;
+  /* max-width: 1200px; */
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.hero {
+  text-align: center;
+  padding: 4rem 0;
+  background: linear-gradient(135deg, #0062ff 0%, #0062ff22 100%);
+  color: white;
+  border-radius: 1rem;
+  margin-bottom: 3rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.statsSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.statCard {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-5px);
+}
+
+.statCard h3 {
+  font-size: 2rem;
+  color: #0062ff;
+  margin-bottom: 0.5rem;
+}
+
+.filterSection {
+  margin-bottom: 3rem;
+}
+
+.categoryButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin: 2px;
+}
+
+.categoryButton {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 2rem;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.categoryButton.active {
+  background: #0062ff;
+  color: white;
+}
+
+.testimonialGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 2fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.testimonialCard {
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  max-width: 400px;
+}
+
+.testimonialCard.highlighted {
+  transform: scale(1.02);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.testimonialHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.clientImage {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.clientInfo h3 {
+  margin: 0;
+  color: #333;
+}
+
+.clientInfo p {
+  margin: 0.2rem 0;
+  color: #666;
+}
+
+.companyName {
+  font-weight: bold;
+  color: #0062ff;
+}
+
+.rating {
+  color: #ffd700;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.testimonialText {
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.tag {
+  background: #f0f4ff;
+  color: #0062ff;
+  padding: 0.4rem 0.8rem;
+  border-radius: 1rem;
+  font-size: 0.9rem;
+}
+
+.date {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.ctaSection {
+  text-align: center;
+  padding: 4rem;
+  background: white;
+  border-radius: 1rem;
+  margin-top: 3rem;
+}
+
+.ctaSection h2 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.ctaSection p {
+  color: #666;
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaButton {
+  background: #0062ff;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+  background: #0051d4;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .pageContainer {
+    padding: 1rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .testimonialGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .categoryButtons {
+    flex-direction: column;
+  }
+
+  .categoryButton {
+    width: 100%;
+  }
+
+  .ctaSection {
+    padding: 2rem 1rem;
+  }
+}
