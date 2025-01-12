@@ -15,9 +15,9 @@ export default function Home() {
 
     return (
         <div>
-
+  <Navbar />
             <section>
-                <Navbar />
+              
                 {/* <SplashCursor /> */}
 
                 <main className={styles.main}>
@@ -70,7 +70,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Integration Section */}
       {/* Integration Section */}
 <section className={styles.integration}>
   <h2>Payment Integration Partners</h2>
@@ -180,23 +179,23 @@ export default function Home() {
         <h2>Built with Modern Technology Stack</h2>
         <div className={styles.techStack}>
           <div className={styles.techItem}>
-            <Image src="/api/placeholder/80/80" alt="Node.js" width={80} height={80} />
+            <Image src="/node.png" alt="Node.js" width={80} height={80} />
             <span>Node.js</span>
           </div>
           <div className={styles.techItem}>
-            <Image src="/api/placeholder/80/80" alt="Next.js" width={80} height={80} />
+            <Image src="/next.png" alt="Next.js" width={80} height={80} />
             <span>Next.js</span>
           </div>
           <div className={styles.techItem}>
-            <Image src="/api/placeholder/80/80" alt="React" width={80} height={80} />
+            <Image src="/react.png" alt="React" width={80} height={80} />
             <span>React</span>
           </div>
           <div className={styles.techItem}>
-            <Image src="/api/placeholder/80/80" alt="AWS" width={80} height={80} />
+            <Image src="/aws.png" alt="AWS" width={80} height={80} />
             <span>AWS</span>
           </div>
           <div className={styles.techItem}>
-            <Image src="/api/placeholder/80/80" alt="Docker" width={80} height={80} />
+            <Image src="/docker.png" alt="Docker" width={80} height={80} />
             <span>Docker</span>
           </div>
         </div>

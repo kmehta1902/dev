@@ -1,6 +1,6 @@
 .main {
   width: 100%;
-  max-width: 1200px;
+  /* max-width: 1200px; */
   margin: 0 auto;
   padding: 0 20px;
 }
@@ -135,7 +135,7 @@
   border-radius: 12px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
   transition: transform 0.3s ease;
 }
@@ -239,6 +239,7 @@
 .techStack {
   display: flex;
   justify-content: center;
+  align-items: baseline;
   flex-wrap: wrap;
   gap: 48px;
 }
@@ -248,7 +249,7 @@
 }
 
 .techItem span {
-  display: block;
+  display: none;
   margin-top: 12px;
   font-size: 1.125rem;
 }
@@ -357,8 +358,10 @@
     justify-content: center;
   }
   .paymentPartner {
+    display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     text-align: center;
   }
 

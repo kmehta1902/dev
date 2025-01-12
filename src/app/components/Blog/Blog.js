@@ -67,7 +67,7 @@ const BlogCard = ({ id, date, title, description, image }) => (
             <p className="blog-date">{date}</p>
             <h3 className="blog-title">{title}</h3>
             <p className="blog-description">{description}</p>
-            <Link href={`/blog/${id}`} className="read-more">
+            <Link href={`/Company/blog/${id}`} className="read-more">
                 Read More
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -76,68 +76,6 @@ const BlogCard = ({ id, date, title, description, image }) => (
         </div>
     </div>
 );
-
-// const LatestInsights = () => {
-//     const scrollRef = useRef(null);
-
-//     const scroll = (direction) => {
-//         if (scrollRef.current) {
-//             const scrollAmount = direction === 'left' ? -300 : 300;
-//             scrollRef.current.scrollBy({
-//                 left: scrollAmount,
-//                 behavior: 'smooth'
-//             });
-//         }
-//     };
-
-//     return (
-//         <div className="insights-container">
-//             <div className="insights-header">
-//                 <h2 className="insights-title">Latest Insights & News</h2>
-//                 <p className="insights-subtitle">
-//                     Stay updated with the latest trends in technology and development
-//                 </p>
-//             </div>
-
-//             <div className="blog-section">
-//                 <button 
-//                     className="scroll-button left"
-//                     onClick={() => scroll('left')}
-//                     aria-label="Scroll left"
-//                 >
-//                     <ChevronLeft className="w-6 h-6" />
-//                 </button>
-                
-//                 <div className="blog-grid" ref={scrollRef}>
-//                     {posts.map((post) => (
-//                         <BlogCard key={post.id} {...post} />
-//                     ))}
-//                 </div>
-
-//                 <button 
-//                     className="scroll-button right"
-//                     onClick={() => scroll('right')}
-//                     aria-label="Scroll right"
-//                 >
-//                     <ChevronRight className="w-6 h-6" />
-//                 </button>
-//             </div>
-
-//             <div className="view-all-container">
-//                 <Link href="/blog" className="view-all-button">
-//                     View All Posts
-//                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-//                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-//                     </svg>
-//                 </Link>
-//             </div>
-//         </div>
-//     );
-// };
-
-// export default LatestInsights;
-
-
 
 const LatestInsights = () => {
     const scrollRef = useRef(null);
