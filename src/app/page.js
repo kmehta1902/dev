@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Navbar from './components/Navbar/Navbar';
 import Hero from './components/Hero/Hero';
 import Services from './components/Services/Services';
-import Portfolio from './components/Portfolio/Portfolio';
+import Portfolio from './components/Portfolio/page';
 import Technologies from './components/Technologies/Technologies';
 import DevelopmentProcess from './components/DevelopmentProcess/DevelopmentProcess';
 import Testimonials from './components/Testimonials/Testimonials';
@@ -50,6 +50,8 @@ export default function Home() {
           name="description"
           content="Custom software solutions to transform your business. Web development, mobile apps, enterprise solutions, and more."
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="HandheldFriendly" content="true" />
         <link rel="icon" href="/favicon.ico" />
         <link
           href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
@@ -59,7 +61,7 @@ export default function Home() {
 
       <main>
         <Navbar />
-        <SplashCursor />
+        {/* <SplashCursor /> */}
         <Hero />
         <Stats />
         <Services />

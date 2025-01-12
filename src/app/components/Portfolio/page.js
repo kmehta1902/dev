@@ -4,12 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import styles from './Portfolio.module.css';
-import Testimonials from '../components/Testimonials/Testimonials';
-import Blog from '../components/Blog/Blog';
-import QuoteForm from '../components/QuoteForm/QuoteForm';
-import Navbar from '../components/Navbar/Navbar';
-import Footer from '../components/Footer/Footer';
-import ContactForm from '../components/ContactForm/ContactForm';
+
 import { motion } from 'framer-motion';
 import {
   ShoppingCart,
@@ -138,7 +133,7 @@ export default function Portfolio() {
 
   return (
     <div>
-      <Navbar />
+    
       <section id="portfolio" className={styles.portfolio}>
         <div className={styles.container}>
           <div className={styles.header}>
@@ -213,11 +208,7 @@ export default function Portfolio() {
           </motion.div>
         </div>
       </section>
-      <Testimonials />
-      <Blog />
-      <QuoteForm />
-      <ContactForm />
-      <Footer />
+     
     </div>
   );
 }

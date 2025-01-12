@@ -59,7 +59,7 @@ const DevelopmentProcess = () => {
             </div>
           </div>
         ))}
-        <button className={styles.startButton}>Start Your Project →</button>
+        <button className={styles.startButton}><a href='/GetaQuote'>Start Your Project →</a></button>
       </div>
     </section>
   );

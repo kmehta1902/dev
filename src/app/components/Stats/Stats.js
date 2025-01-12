@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { Briefcase, Users, Trophy,Computer } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { Briefcase, Users, Trophy, Computer } from 'lucide-react';
+import { motion, useInView } from 'framer-motion';
 import styles from './Stats.module.css';
 
-const CountUpNumber = ({ number, delay }) => {
+const CountUpNumber = ({ number, delay, shouldStart }) => {
   const [count, setCount] = useState(0);
   const duration = 2000;
   const finalNumber = parseInt(number, 10);
 
   useEffect(() => {
+    if (!shouldStart) {
+      setCount(0);
+      return;
+    }
+
     const timeout = setTimeout(() => {
       const start = Date.now();
       const animate = () => {
@@ -20,8 +26,9 @@ const CountUpNumber = ({ number, delay }) => {
       };
       requestAnimationFrame(animate);
     }, delay * 1000);
+
     return () => clearTimeout(timeout);
-  }, [finalNumber, delay]);
+  }, [finalNumber, delay, shouldStart]);
 
   return count.toString();
 };
@@ -54,25 +61,100 @@ const stats = [
 ];
 
 const Stats = () => {
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, {
+    once: false,
+    margin: "-100px 0px"
+  });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        when: "beforeChildren",
+        staggerChildren: 0.2,
+      }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { 
+      opacity: 0,
+      y: 20,
+      scale: 0.95
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
+  const iconVariants = {
+    hidden: { 
+      scale: 0,
+      rotate: -180
+    },
+    visible: { 
+      scale: 1,
+      rotate: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <div className={styles.statsGrid}>
+    <motion.div 
+      ref={sectionRef}
+      className={styles.statsGrid}
+      variants={containerVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+    >
       {stats.map((stat, index) => (
-        <div key={index} className={styles.statCard}>
+        <motion.div 
+          key={index} 
+          className={styles.statCard}
+          variants={cardVariants}
+        >
           <div className={styles.statContent}>
-            <div className={styles.iconWrapper}>
+            <motion.div 
+              className={styles.iconWrapper}
+              variants={iconVariants}
+            >
               {stat.icon}
-            </div>
+            </motion.div>
             <div className={styles.statNumber}>
-              <CountUpNumber number={stat.number} delay={0.9 + index * 0.1} />
+              <CountUpNumber 
+                number={stat.number} 
+                delay={0.9 + index * 0.1} 
+                shouldStart={isInView}
+              />
               {stat.suffix}
             </div>
-            <div className={styles.statLabel}>
+            <motion.div 
+              className={styles.statLabel}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { 
+                  opacity: 1,
+                  transition: { delay: 0.3 }
+                }
+              }}
+            >
               {stat.label}
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 
