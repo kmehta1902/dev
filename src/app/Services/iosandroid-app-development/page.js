@@ -9,6 +9,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './page.module.css';
 import Navbar from '@/app/components/Navbar/Navbar';
+import Footer from '@/app/components/Footer/Footer';
 
 const MobileAppDevelopmentPage = () => {
   const appFeatures = [
