@@ -12,7 +12,7 @@ import Testimonials from './components/Testimonials/Testimonials';
 import QuoteForm from './components/QuoteForm/QuoteForm';
 import ContactForm from './components/ContactForm/ContactForm';
 import Footer from './components/Footer/Footer';
-import SplashCursor from './components/Cursor/SplashCursor';
+// import SplashCursor from './components/Cursor/SplashCursor';
 import Blog from './components/Blog/Blog'
 import Stats from './components/Stats/Stats';
 
