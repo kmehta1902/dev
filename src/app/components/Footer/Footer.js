@@ -13,13 +13,13 @@ const Footer = () => {
         <div className={styles.companySection}>
           <div className={styles.company}>
             <Image
-              src="/logo-dark.jpg"
+              src="/logo-dark.png"
               alt="DevionX Technologies Logo"
-              width={150}
-              height={50}
+              width={200}
+              height={10}
               className={styles.logo}
             />
-            <h2>DevionX Technologies</h2>
+            {/* <h2>DevionX Technologies</h2> */}
             <p>Providing innovative software solutions for businesses worldwide.</p>
             <div className={styles.socialLinks}>
               <a href="#"><i className="fab fa-facebook"></i></a>

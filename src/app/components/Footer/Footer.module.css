@@ -25,7 +25,8 @@
 }
 
 .logo {
-  margin-bottom: 1rem;
+  margin-bottom: 0;
+  height: 120px;
 }
 
 .company h2 {
@@ -36,6 +37,7 @@
 
 .company p {
   color: #cbd5e1;
+  font-size: 1.2rem;
   margin-bottom: 1.5rem;
 }
 

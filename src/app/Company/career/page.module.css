@@ -1,0 +1,265 @@
+.pageContainer {
+  /* max-width: 1200px; */
+  width: 95%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.heroImage {
+  width: 100%;
+  height: auto;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.values {
+  margin-bottom: 4rem;
+}
+
+.values h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.valueCard {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.valueCard:hover {
+  transform: translateY(-5px);
+}
+
+.valueCard h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.valueCard p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.benefits {
+  margin-bottom: 4rem;
+  background: #f8f9fa;
+  padding: 4rem 2rem;
+  border-radius: 1rem;
+}
+
+.benefits h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.benefitsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.benefitCard {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.benefitIcon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.benefitCard h3 {
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.benefitCard p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.openPositions {
+  margin-bottom: 4rem;
+}
+
+.openPositions h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+}
+
+.filter {
+  padding: 0.8rem 1.5rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: #333;
+  background: #fff;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.jobsGrid {
+  display: grid;
+  gap: 2rem;
+}
+
+.jobCard {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.jobHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.jobHeader h3 {
+  color: #333;
+  margin: 0;
+}
+
+.jobType {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+}
+
+.jobDetails {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.jobDetails p {
+  margin: 0;
+  color: #666;
+}
+
+.jobDescription {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.jobFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+
+.postDate {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.applyButton {
+  background: #1976d2;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.applyButton:hover {
+  background: #1565c0;
+}
+
+.joinUs {
+  margin-bottom: 4rem;
+}
+
+.joinUs h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.joinUsContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.joinUsText {
+  color: #666;
+  line-height: 1.6;
+}
+
+.joinUsText ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.joinUsText li {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.joinUsText li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #1976d2;
+}
+
+.joinUsImage {
+  width: 100%;
+  height: auto;
+}

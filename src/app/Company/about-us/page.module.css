@@ -1,0 +1,362 @@
+/* styles/About.module.css */
+.container {
+  /* max-width: 1200px; */
+  width: 95%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero {
+  text-align: center;
+  padding: 60px 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #1a1a1a;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.heroStats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.heroStat {
+  text-align: center;
+}
+
+.heroStat span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4070f4;
+}
+
+.heroStat p {
+  margin-top: 5px;
+  font-size: 1rem;
+}
+
+.section {
+  margin: 40px 0;
+}
+
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #1a1a1a;
+  text-align: center;
+}
+
+.storyContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.storyText p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+  color: #666;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+
+.timelineItem {
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.timelineItem h4 {
+  color: #4070f4;
+  margin-bottom: 5px;
+}
+
+.missionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.missionCard {
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.missionCard h3 {
+  color: #4070f4;
+  margin-bottom: 15px;
+}
+
+.statsSection {
+  margin: 60px 0;
+  text-align: center;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.statCard {
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.statCard h3 {
+  font-size: 2.5rem;
+  color: #4070f4;
+  margin-bottom: 10px;
+}
+
+.statDetail {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 10px;
+}
+
+.services {
+  margin: 60px 0;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.serviceCard {
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.serviceCard h3 {
+  color: #4070f4;
+  margin-bottom: 15px;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.featureCard {
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+.featureList li {
+  margin: 8px 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.iconBlue,
+.iconPurple,
+.iconGreen {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.iconBlue {
+  background: #e8f0fe;
+  color: #4070f4;
+}
+
+.iconPurple {
+  background: #f3e8ff;
+  color: #9333ea;
+}
+
+.iconGreen {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.vision {
+  background: #4070f4;
+  color: white;
+  padding: 60px;
+  border-radius: 12px;
+  text-align: center;
+  margin: 60px 0;
+}
+
+.visionGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  margin: 40px 0;
+}
+
+.visionCard {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.joinButton {
+  background: white;
+  color: #4070f4;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.joinButton:hover {
+  transform: translateY(-2px);
+}
+
+.culture {
+  margin: 60px 0;
+}
+
+.cultureGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.cultureCard {
+  padding: 20;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #1a1a1a;
+  margin-bottom: 3rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.iconWrapper {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.iconBlue {
+  background-color: #e8f0fe;
+  color: #4070f4;
+}
+
+.iconPurple {
+  background-color: #f3e8ff;
+  color: #9333ea;
+}
+
+.iconGreen {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.iconRed {
+  background-color: #ffe4e4;
+  color: #dc2626;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.description {
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
