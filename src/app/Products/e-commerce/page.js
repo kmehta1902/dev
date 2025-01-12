@@ -18,7 +18,7 @@ export default function Home() {
 
             <section>
                 <Navbar />
-                <SplashCursor />
+                {/* <SplashCursor /> */}
 
                 <main className={styles.main}>
       {/* Hero Section */}

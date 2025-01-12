@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import React from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import Testimonials from '../../components/Testimonials/Testimonials';
 import QuoteForm from '../../components/QuoteForm/QuoteForm';
@@ -17,7 +17,7 @@ export default function Home() {
 
             <section>
                 <Navbar />
-                <SplashCursor />
+                {/* <SplashCursor /> */}
 
                 <main className={styles.main}>
       {/* Hero Section */}
@@ -34,7 +34,7 @@ export default function Home() {
           </div>
         </div>
         <div className={styles.heroImage}>
-          <Image src="/lms-hero.png" alt="LMS Dashboard" width={600} height={400} />
+          <Image src="/lms-hero.jpg" alt="LMS Dashboard" width={600} height={400} />
         </div>
       </section>
 
