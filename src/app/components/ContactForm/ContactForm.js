@@ -1,6 +1,14 @@
 'use client';
 import { useState } from 'react';
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { 
+  Facebook, 
+  Twitter, 
+  Instagram, 
+  Linkedin,
+  MapPin,
+  Phone,
+  Clock
+} from 'lucide-react';
 import styles from './ContactForm.module.css';
 
 const ContactForm = () => {
@@ -22,7 +30,6 @@ const ContactForm = () => {
     let valid = true;
     let newErrors = {};
 
-    // Check if fields are filled out
     if (!formData.name) {
       newErrors.name = 'Name is required';
       valid = false;
@@ -68,23 +75,24 @@ const ContactForm = () => {
           {/* Contact Info Boxes */}
           <div className={styles.infoBox}>
             <div className={styles.iconWrapper}>
-              <i className="location-icon"></i>
+              <MapPin className={styles.icon} size={24} />
             </div>
             <div>
               <h3>Office Location</h3>
-              <p>123 Business Avenue</p>
-              <p>Tech Park, Suite 456</p>
-              <p>City, Country 12345</p>
+              <p>H.no 1229 Seetamai Apt,</p>
+              <p>Sect 12D, Kopar Khairane, </p>
+              <p>Navi Mumbai 400709</p>
             </div>
           </div>
 
           <div className={styles.infoBox}>
             <div className={styles.iconWrapper}>
-              <i className="contact-icon"></i>
+              <Phone className={styles.icon} size={24} />
             </div>
             <div>
               <h3>Contact Details</h3>
-              <p>Phone: +1 (123) 456-7890</p>
+              <p>Phone:Mr.Ajay Bade: +91 9370613157 </p>
+              <p>Phone:Mr.Shrikrushna Patil: +91 7666675306 </p>
               <p>Email: info@devionx.com</p>
               <p>Support: support@devionx.com</p>
             </div>
@@ -92,11 +100,11 @@ const ContactForm = () => {
 
           <div className={styles.infoBox}>
             <div className={styles.iconWrapper}>
-              <i className="clock-icon"></i>
+              <Clock className={styles.icon} size={24} />
             </div>
             <div>
               <h3>Business Hours</h3>
-              <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+              <p>Monday - Friday: 9:00 AM - 9:00 PM</p>
               <p>Saturday: 10:00 AM - 2:00 PM</p>
               <p>Sunday: Closed</p>
             </div>
