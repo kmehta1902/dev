@@ -65,7 +65,7 @@
 
 .socialIcons {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   gap: 1.5rem;
   padding: 1rem;
   border-top: 1px solid #e5e7eb;
@@ -155,4 +155,10 @@
   .contactGrid {
     grid-template-columns: 1fr;
   }
+  .infoBox p {
+    
+    font-size: smaller;
+    
+  }
+  
 }

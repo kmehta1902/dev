@@ -52,7 +52,7 @@
   background-color: white;
   border-radius: 0.75rem;
   padding: 2.5rem; /* Increased padding */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.2s ease-in-out;
   min-height: 400px; /* Increased minimum height */
   min-width: 280px; /* Added minimum width */
@@ -373,7 +373,33 @@
     min-height: 360px;
     padding: 2rem;
   }
-}
+
+    .grid {
+      display: flex;
+      /* overflow: hidden; */
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      gap: 0;
+      position: relative;
+    }
+  
+    .card {
+      flex: 0 0 100%;
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      left: -15;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+      margin: 0 1rem;
+    }
+  
+    .card.activeCard {
+      opacity: 1;
+      visibility: visible;
+      position: relative;
+    }
+  }
+
 
 /* Added new media query for extra large screens */
 @media (min-width: 1536px) {

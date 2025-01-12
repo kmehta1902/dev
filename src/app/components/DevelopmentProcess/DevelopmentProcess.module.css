@@ -7,7 +7,10 @@
   position: relative;
   overflow: hidden;
 }
-
+.startButton a{
+  text-decoration: none;
+  color: white;
+}
 .backgroundWrapper {
   position: absolute;
   top: 0;

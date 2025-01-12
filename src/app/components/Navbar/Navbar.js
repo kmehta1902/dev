@@ -211,20 +211,20 @@ const Navbar = () => {
                                     <div className={`${styles.dropdownContent} ${styles[animationDirection]}`}>
                                         {dropdownContent.products.map((item) => (
                                             <Link
-                                                key={item.title}
-                                                href={`/products/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
-                                                className={styles.dropdownItem}
-                                            >
-                                                <div className={styles.dropdownTitle}>{item.title}</div>
-                                                <div className={styles.dropdownDescription}>{item.description}</div>
-                                            </Link>
+                                            key={item.title}
+                                            href={`/Products/${item.title.toLowerCase()}`}
+                                            className={styles.dropdownItem}
+                                        >
+                                            <div className={styles.dropdownTitle}>{item.title}</div>
+                                            <div className={styles.dropdownDescription}>{item.description}</div>
+                                        </Link>
                                         ))}
                                     </div>
                                 </div>
                             )}
                         </div>
 
-                        <Link href="/portfolio" className={styles.navLink}>
+                        <Link href="/Portfolio" className={styles.navLink}>
                             Portfolio
                         </Link>
 
@@ -317,7 +317,7 @@ const Navbar = () => {
                                     {dropdownContent.services.map((item) => (
                                         <Link
                                             key={item.title}
-                                            href={`/services/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                            href={`/Services/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
                                             className={styles.mobileDropdownItem}
                                         >
                                             <div className={styles.dropdownTitle}>{item.title}</div>
@@ -342,7 +342,7 @@ const Navbar = () => {
                                     {dropdownContent.products.map((item) => (
                                         <Link
                                             key={item.title}
-                                            href={`/products/${item.title.toLowerCase().replace(/\s+/g, '-')}`}
+                                            href={`/Products/${item.title.toLowerCase()}`}
                                             className={styles.mobileDropdownItem}
                                         >
                                             <div className={styles.dropdownTitle}>{item.title}</div>
@@ -353,7 +353,7 @@ const Navbar = () => {
                             )}
                         </div>
 
-                        <Link href="/portfolio" className={styles.mobileNavLink}>
+                        <Link href="/Portfolio" className={styles.mobileNavLink}>
                             Portfolio
                         </Link>
 

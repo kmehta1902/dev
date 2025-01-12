@@ -1,6 +1,7 @@
 .services {
   padding: 5rem 0;
   background-color: rgb(249, 250, 251);
+  padding-bottom: 1rem;
 }
 
 .container {
@@ -121,21 +122,71 @@
   }
 }
 
+/* Add these new styles to your existing Services.module.css */
+
 @media (max-width: 768px) {
-  .services {
-    padding: 4rem 0;
-  }
-  .title {
-    font-size: 2rem;
-  }
   .grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+    display: block;
+    position: relative;
+    height: 450px; /* Adjust based on your card height */
+    margin: 0 1rem;
   }
+
   .card {
-    padding: 1.5rem;
+    position: absolute;
+    height: 60vh;
+    top: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(100%);
+    transition: 
+      opacity 0.5s ease,
+      visibility 0.5s ease,
+      transform 0.5s ease;
+  }
+
+  .card.activeCard {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    position: absolute;
+  }
+
+  /* Disable spotlight effect on mobile */
+  .spotlight {
+    display: none;
   }
 }
+
+/* Optional: Add progress indicators for mobile */
+.mobileIndicators {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .mobileIndicators {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #e5e7eb;
+    transition: background-color 0.3s ease;
+  }
+
+  .indicator.active {
+    background-color: #4f46e5;
+  }
+}
+
+/* Keep all your existing styles and other media queries */
 
 @media (max-width: 640px) {
   .container {

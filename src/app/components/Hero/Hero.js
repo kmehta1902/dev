@@ -1,9 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import styles from './Hero.module.css';
-
 
 const ShinyText = ({ text, disabled = false, speed = 5, className = '' }) => {
   const animationDuration = `${speed}s`;
@@ -36,13 +35,13 @@ const SequentialShinyText = ({ text, speed = 0.2 }) => (
   </div>
 );
 
-const BlurText = ({ children, delay = 0 }) => (
+const BlurText = ({ children, delay = 0, inView }) => (
   <motion.span
     initial={{ filter: 'blur(10px)', opacity: 0 }}
-    animate={{
+    animate={inView ? {
       filter: 'blur(0px)',
       opacity: 1,
-    }}
+    } : { filter: 'blur(10px)', opacity: 0 }}
     transition={{
       duration: 0.8,
       delay,
@@ -56,12 +55,18 @@ const BlurText = ({ children, delay = 0 }) => (
 
 export default function Hero() {
   const [key, setKey] = useState(0);
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { 
+    once: false,
+    margin: "-100px 0px" // Triggers slightly before the section comes into view
+  });
 
   useEffect(() => {
-    setKey((prev) => prev + 1);
-  }, []);
+    if (isInView) {
+      setKey((prev) => prev + 1);
+    }
+  }, [isInView]);
 
-  
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -112,7 +117,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className={styles.wrapper}>
+    <section id="home" className={styles.wrapper} ref={sectionRef}>
       <div className={styles.container}>
         <AnimatePresence mode="wait">
           <motion.div
@@ -120,7 +125,7 @@ export default function Hero() {
             className={styles.grid}
             variants={containerVariants}
             initial="hidden"
-            animate="visible"
+            animate={isInView ? "visible" : "hidden"}
           >
             <div className={styles.content}>
               <motion.div variants={itemVariants} className={styles.badge}>
@@ -128,7 +133,7 @@ export default function Hero() {
               </motion.div>
 
               <motion.h1 variants={itemVariants} className={styles.heading}>
-                <BlurText delay={0.2}>
+                <BlurText delay={0.2} inView={isInView}>
                   Transform Your Business with{' '}
                   <span className={styles.highlight}>
                     Custom Software Solutions
@@ -137,7 +142,7 @@ export default function Hero() {
               </motion.h1>
 
               <motion.p variants={itemVariants} className={styles.description}>
-                <BlurText delay={0.4}>
+                <BlurText delay={0.4} inView={isInView}>
                   We craft tailored software solutions that empower businesses to thrive in the
                   digital age. From web applications to enterprise systems, we bring your vision to
                   life.
@@ -152,7 +157,7 @@ export default function Hero() {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <BlurText delay={0.6}>Get Started →</BlurText>
+                  <BlurText delay={0.6} inView={isInView}><a href='/GetaQuote'>Get Started →</a></BlurText>
                 </motion.button>
                 <motion.button
                   className={styles.secondaryButton}
@@ -161,29 +166,22 @@ export default function Hero() {
                   whileHover="hover"
                   whileTap="tap"
                 >
-                  <BlurText delay={0.7}>View Our Work</BlurText>
+                  <BlurText delay={0.7} inView={isInView}><a href='/Portfolio'>View Our Work</a></BlurText>
                 </motion.button>
               </motion.div>
-
-             
             </div>
 
             <motion.div variants={imageVariants} className={styles.imageSection}>
               <div className={styles.imageContainer}>
                 <div className={styles.animationWrapper}>
                   <div className={styles.shape}>
-                    {/* Animated circles */}
                     <div className={styles.animatedCircle}></div>
                     <div className={styles.animatedCircle}></div>
                     <div className={styles.animatedCircle}></div>
-
-                    {/* Floating dots */}
                     <div className={styles.floatingDot}></div>
                     <div className={styles.floatingDot}></div>
                     <div className={styles.floatingDot}></div>
                     <div className={styles.floatingDot}></div>
-
-                    {/* Glowing rings */}
                     <div className={styles.glowingRing}></div>
                     <div className={styles.glowingRing}></div>
                     <div className={styles.glowingRing}></div>

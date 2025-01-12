@@ -1,17 +1,19 @@
 // Services.js
 'use client';
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import styles from './Services.module.css';
 import { Monitor, Building2, Cloud, LightbulbIcon, Globe, Smartphone, Rocket, Palette, Users } from 'lucide-react';
+import { useSwipeGesture } from '../SwipeGesture/SwipeGesture';
 
-const ServiceCard = ({ service }) => {
+const ServiceCard = ({ service, isActive, isMobile }) => {
+  
   const divRef = useRef(null);
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e) => {
-    if (!divRef.current) return;
+    if (!divRef.current || isMobile) return;
 
     const div = divRef.current;
     const rect = div.getBoundingClientRect();
@@ -25,18 +27,20 @@ const ServiceCard = ({ service }) => {
   return (
     <div
       ref={divRef}
-      className={styles.card}
+      className={`${styles.card} ${isActive ? styles.activeCard : ''}`}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsFocused(true)}
       onMouseLeave={() => setIsFocused(false)}
     >
-      <div
-        className={styles.spotlight}
-        style={{
-          opacity: isFocused ? 1 : 0,
-          transform: `translate(${position.x}px, ${position.y}px)`,
-        }}
-      />
+      {!isMobile && (
+        <div
+          className={styles.spotlight}
+          style={{
+            opacity: isFocused ? 1 : 0,
+            transform: `translate(${position.x}px, ${position.y}px)`,
+          }}
+        />
+      )}
       <div className={styles.cardContent}>
         <div className={styles.iconWrapper}>
           {service.icon}
@@ -57,6 +61,21 @@ const ServiceCard = ({ service }) => {
 };
 
 export default function Services() {
+  const { onTouchStart, onTouchMove, onTouchEnd } = useSwipeGesture({
+    onSwipeLeft: () => {
+      setCurrentCardIndex((prev) => (prev + 1) % services.length);
+    },
+    onSwipeRight: () => {
+      setCurrentCardIndex((prev) => (prev - 1 + services.length) % services.length);
+    }
+  });
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const cardScrollRef = useRef(null);
+  const cardAnimationRef = useRef(null);
+  const lastCardScrollTime = useRef(0);
+  const autoScrollEnabled = useRef(true);
+
   const services = [
     {
       title: 'Customised Software Development',
@@ -114,6 +133,61 @@ export default function Services() {
     }
   ];
 
+  const startCardScrolling = () => {
+    if (!isMobile || !autoScrollEnabled.current) return;
+    
+    const scroll = (timestamp) => {
+      if (!lastCardScrollTime.current) lastCardScrollTime.current = timestamp;
+      const deltaTime = timestamp - lastCardScrollTime.current;
+      
+      if (deltaTime >= 3000) { // Change card every 3 seconds
+        setCurrentCardIndex((prev) => (prev + 1) % services.length);
+        lastCardScrollTime.current = timestamp;
+      }
+      
+      cardAnimationRef.current = requestAnimationFrame(scroll);
+    };
+
+    cardAnimationRef.current = requestAnimationFrame(scroll);
+  };
+
+  const stopCardScrolling = () => {
+    if (cardAnimationRef.current) {
+      cancelAnimationFrame(cardAnimationRef.current);
+      lastCardScrollTime.current = 0;
+    }
+  };
+
+  const handleInteraction = (isInteracting) => {
+    autoScrollEnabled.current = !isInteracting;
+    if (isInteracting) {
+      stopCardScrolling();
+    } else {
+      startCardScrolling();
+    }
+  };
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const isMobileView = window.innerWidth <= 768;
+      setIsMobile(isMobileView);
+      if (!isMobileView) {
+        stopCardScrolling();
+        setCurrentCardIndex(0);
+      } else {
+        startCardScrolling();
+      }
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      stopCardScrolling();
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
+
   return (
     <section id="services" className={styles.services}>
       <div className={styles.container}>
@@ -123,9 +197,27 @@ export default function Services() {
             We offer comprehensive software development solutions tailored to meet your business needs.
           </p>
         </div>
-        <div className={styles.grid}>
+        <div 
+  className={styles.grid}
+  ref={cardScrollRef}
+  onTouchStart={(e) => {
+    handleInteraction(true);
+    onTouchStart(e);
+  }}
+  onTouchMove={onTouchMove}
+  onTouchEnd={(e) => {
+    onTouchEnd(e);
+    handleInteraction(false);
+  }}
+>
+
           {services.map((service, index) => (
-            <ServiceCard key={index} service={service} />
+            <ServiceCard 
+              key={index} 
+              service={service} 
+              isActive={isMobile ? index === currentCardIndex : true}
+              isMobile={isMobile}
+            />
           ))}
         </div>
       </div>

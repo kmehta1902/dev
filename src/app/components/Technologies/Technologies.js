@@ -1,11 +1,25 @@
 import { useState, useEffect, useRef } from 'react';
 import styles from './Technologies.module.css';
+import { useSwipeGesture } from '../SwipeGesture/SwipeGesture';
 
 const Technologies = () => {
+  const { onTouchStart, onTouchMove, onTouchEnd } = useSwipeGesture({
+    onSwipeLeft: () => {
+      setCurrentCardIndex((prev) => (prev + 1) % Object.keys(technologies).length);
+    },
+    onSwipeRight: () => {
+      setCurrentCardIndex((prev) => (prev - 1 + Object.keys(technologies).length) % Object.keys(technologies).length);
+    }
+  });
   const [activeName, setActiveName] = useState('');
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const scrollRef = useRef(null);
+  const cardScrollRef = useRef(null);
   const animationRef = useRef(null);
+  const cardAnimationRef = useRef(null);
   const lastScrollTime = useRef(0);
+  const lastCardScrollTime = useRef(0);
+  const isMobileRef = useRef(false);
 
   const technologies = {
     Frontend: {
@@ -39,7 +53,7 @@ const Technologies = () => {
   };
 
   const partners = ['AWS', 'Google', 'Microsoft', 'Oracle', 'IBM', 'Salesforce'];
-  const scrollingPartners = [...partners, ...partners, ...partners, ...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners,...partners];
+  const scrollingPartners = [...Array(75)].flatMap(() => partners);
 
   const findCenterPartner = () => {
     const container = scrollRef.current;
@@ -66,15 +80,40 @@ const Technologies = () => {
     return closestPartner;
   };
 
-  const startScrolling = () => {
+  const startCardScrolling = () => {
+    if (!isMobileRef.current) return;
+    
+    const scroll = (timestamp) => {
+      if (!lastCardScrollTime.current) lastCardScrollTime.current = timestamp;
+      const deltaTime = timestamp - lastCardScrollTime.current;
+      
+      if (deltaTime >= 3000) { // Change card every 3 seconds
+        setCurrentCardIndex((prev) => (prev + 1) % Object.keys(technologies).length);
+        lastCardScrollTime.current = timestamp;
+      }
+      
+      cardAnimationRef.current = requestAnimationFrame(scroll);
+    };
+
+    cardAnimationRef.current = requestAnimationFrame(scroll);
+  };
+
+  const stopCardScrolling = () => {
+    if (cardAnimationRef.current) {
+      cancelAnimationFrame(cardAnimationRef.current);
+      lastCardScrollTime.current = 0;
+    }
+  };
+
+  const startPartnerScrolling = () => {
     const container = scrollRef.current;
-    let scrollSpeed = window.innerWidth <= 480 ? 0.5 : 1; // Slower speed for mobile
+    let scrollSpeed = window.innerWidth <= 480 ? 0.5 : 1;
     
     const scroll = (timestamp) => {
       if (!lastScrollTime.current) lastScrollTime.current = timestamp;
       const deltaTime = timestamp - lastScrollTime.current;
       
-      if (deltaTime >= 16) { // Limit to ~60fps
+      if (deltaTime >= 16) {
         if (container) {
           if (container.scrollLeft >= (container.scrollWidth / 3) * 2) {
             container.scrollLeft = 0;
@@ -99,7 +138,7 @@ const Technologies = () => {
     animationRef.current = requestAnimationFrame(scroll);
   };
 
-  const stopScrolling = () => {
+  const stopPartnerScrolling = () => {
     if (animationRef.current) {
       cancelAnimationFrame(animationRef.current);
       lastScrollTime.current = 0;
@@ -107,29 +146,47 @@ const Technologies = () => {
   };
 
   useEffect(() => {
+    const checkMobile = () => {
+      isMobileRef.current = window.innerWidth <= 768;
+      if (isMobileRef.current) {
+        startCardScrolling();
+      } else {
+        stopCardScrolling();
+        setCurrentCardIndex(0);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
     const container = scrollRef.current;
+    const cardContainer = cardScrollRef.current;
+    
     if (container) {
-      // Initial delay and scroll to first item
       const timeoutId = setTimeout(() => {
         container.scrollLeft = 0;
-        startScrolling();
+        startPartnerScrolling();
       }, 1000);
 
-      container.addEventListener('mouseenter', stopScrolling);
-      container.addEventListener('mouseleave', startScrolling);
-      container.addEventListener('touchstart', stopScrolling);
-      container.addEventListener('touchend', startScrolling);
+      container.addEventListener('mouseenter', stopPartnerScrolling);
+      container.addEventListener('mouseleave', startPartnerScrolling);
+      container.addEventListener('touchstart', stopPartnerScrolling);
+      container.addEventListener('touchend', startPartnerScrolling);
 
       return () => {
         clearTimeout(timeoutId);
-        stopScrolling();
-        container.removeEventListener('mouseenter', stopScrolling);
-        container.removeEventListener('mouseleave', startScrolling);
-        container.removeEventListener('touchstart', stopScrolling);
-        container.removeEventListener('touchend', startScrolling);
+        stopPartnerScrolling();
+        stopCardScrolling();
+        window.removeEventListener('resize', checkMobile);
+        container.removeEventListener('mouseenter', stopPartnerScrolling);
+        container.removeEventListener('mouseleave', startPartnerScrolling);
+        container.removeEventListener('touchstart', stopPartnerScrolling);
+        container.removeEventListener('touchend', startPartnerScrolling);
       };
     }
   }, []);
+
+  const techEntries = Object.entries(technologies);
 
   return (
     <section className={styles.container}>
@@ -139,9 +196,27 @@ const Technologies = () => {
           We leverage the latest technologies to build scalable and robust solutions for your business
         </p>
       </div>
-      <div className={styles.grid}>
-        {Object.entries(technologies).map(([category, { icon, iconContainerClass, iconClass, dotClass, items }]) => (
-          <div key={category} className={styles.card}>
+      <div className={styles.grid} 
+  ref={cardScrollRef}
+  onTouchStart={(e) => {
+    isMobileRef.current && stopCardScrolling();
+    onTouchStart(e);
+  }}
+  onTouchMove={onTouchMove}
+  onTouchEnd={(e) => {
+    onTouchEnd(e);
+    isMobileRef.current && startCardScrolling();
+  }}
+>
+        {techEntries.map(([category, { icon, iconContainerClass, iconClass, dotClass, items }], index) => (
+          <div 
+            key={category} 
+            className={`${styles.card} ${index === currentCardIndex ? styles.activeCard : ''}`}
+            onMouseEnter={() => isMobileRef.current && stopCardScrolling()}
+            onMouseLeave={() => isMobileRef.current && startCardScrolling()}
+            onTouchStart={() => isMobileRef.current && stopCardScrolling()}
+            onTouchEnd={() => isMobileRef.current && startCardScrolling()}
+          >
             <div className={`${styles.iconContainer} ${iconContainerClass}`}>
               <span className={iconClass}>{icon}</span>
             </div>

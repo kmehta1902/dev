@@ -21,7 +21,7 @@ const Footer = () => {
         <div className={styles.section}>
           <h3>Services</h3>
           <ul>
-            <li><a href="#">Web Development</a></li>
+            <li><a href="/Portfolio?type=e-commerce">Web Development</a></li>
             <li><a href="#">Mobile Development</a></li>
             <li><a href="#">Cloud Solutions</a></li>
             <li><a href="#">Enterprise Software</a></li>
