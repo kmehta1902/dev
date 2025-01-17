@@ -19,6 +19,7 @@ import {
   Gauge,
   Building2,
 } from 'lucide-react';
+import SplashCursor from '../components/Cursor/SplashCursor';
 
 // Separate the main content into a new component
 function PortfolioContent() {
@@ -137,6 +138,7 @@ function PortfolioContent() {
 
   return (
     <div>
+      <SplashCursor />
       <Navbar />
       
       {/* Hero Section */}

@@ -4,6 +4,7 @@ import styles from './Product.module.css';
 import Navbar from '../Navbar/Navbar';
 import Footer from '../Footer/Footer';
 import { useRouter } from 'next/navigation';
+import SplashCursor from '../Cursor/SplashCursor';
 
 export default function Blog({ initialProjectId }) {
   const router = useRouter();
@@ -211,6 +212,7 @@ export default function Blog({ initialProjectId }) {
 
   return (
     <div className={styles.wrapper}>
+      <SplashCursor />
       <Navbar />
       <main className={styles.main}>
         <article className={styles.blogPost}>
