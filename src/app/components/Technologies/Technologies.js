@@ -3,16 +3,10 @@ import styles from './Technologies.module.css';
 import { useSwipeGesture } from '../SwipeGesture/SwipeGesture';
 
 const Technologies = () => {
-  const { onTouchStart, onTouchMove, onTouchEnd } = useSwipeGesture({
-    onSwipeLeft: () => {
-      setCurrentCardIndex((prev) => (prev + 1) % Object.keys(technologies).length);
-    },
-    onSwipeRight: () => {
-      setCurrentCardIndex((prev) => (prev - 1 + Object.keys(technologies).length) % Object.keys(technologies).length);
-    }
-  });
   const [activeName, setActiveName] = useState('');
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [visibleCards, setVisibleCards] = useState(4);
+  const [isTabletView, setIsTabletView] = useState(false);
   const scrollRef = useRef(null);
   const cardScrollRef = useRef(null);
   const animationRef = useRef(null);
@@ -55,6 +49,21 @@ const Technologies = () => {
   const partners = ['AWS', 'Google', 'Microsoft', 'Oracle', 'IBM', 'Salesforce'];
   const scrollingPartners = [...Array(75)].flatMap(() => partners);
 
+  const handleCardChange = (direction) => {
+    setCurrentCardIndex(prev => {
+      if (direction === 'next') {
+        return (prev + 1) % Object.keys(technologies).length;
+      } else {
+        return (prev - 1 + Object.keys(technologies).length) % Object.keys(technologies).length;
+      }
+    });
+  };
+
+  const { onTouchStart, onTouchMove, onTouchEnd } = useSwipeGesture({
+    onSwipeLeft: () => handleCardChange('next'),
+    onSwipeRight: () => handleCardChange('prev')
+  });
+
   const findCenterPartner = () => {
     const container = scrollRef.current;
     if (!container) return null;
@@ -81,14 +90,14 @@ const Technologies = () => {
   };
 
   const startCardScrolling = () => {
-    if (!isMobileRef.current) return;
+    if (!isMobileRef.current && !isTabletView) return;
     
     const scroll = (timestamp) => {
       if (!lastCardScrollTime.current) lastCardScrollTime.current = timestamp;
       const deltaTime = timestamp - lastCardScrollTime.current;
       
-      if (deltaTime >= 3000) { // Change card every 3 seconds
-        setCurrentCardIndex((prev) => (prev + 1) % Object.keys(technologies).length);
+      if (deltaTime >= 3000) {
+        handleCardChange('next');
         lastCardScrollTime.current = timestamp;
       }
       
@@ -145,10 +154,23 @@ const Technologies = () => {
     }
   };
 
+  const getVisibleCards = () => {
+    const cards = [];
+    for (let i = 0; i < visibleCards; i++) {
+      const index = (currentCardIndex + i) % Object.keys(technologies).length;
+      cards.push(index);
+    }
+    return cards;
+  };
+
   useEffect(() => {
-    const checkMobile = () => {
-      isMobileRef.current = window.innerWidth <= 768;
-      if (isMobileRef.current) {
+    const checkViewport = () => {
+      const width = window.innerWidth;
+      isMobileRef.current = width <= 480;
+      setIsTabletView(width > 480 && width < 1024);
+      setVisibleCards(width >= 1024 ? 4 : width >= 768 ? 3 : width >= 480 ? 2 : 1);
+      
+      if (isMobileRef.current || isTabletView) {
         startCardScrolling();
       } else {
         stopCardScrolling();
@@ -156,11 +178,10 @@ const Technologies = () => {
       }
     };
 
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
+    checkViewport();
+    window.addEventListener('resize', checkViewport);
 
     const container = scrollRef.current;
-    const cardContainer = cardScrollRef.current;
     
     if (container) {
       const timeoutId = setTimeout(() => {
@@ -177,14 +198,14 @@ const Technologies = () => {
         clearTimeout(timeoutId);
         stopPartnerScrolling();
         stopCardScrolling();
-        window.removeEventListener('resize', checkMobile);
+        window.removeEventListener('resize', checkViewport);
         container.removeEventListener('mouseenter', stopPartnerScrolling);
         container.removeEventListener('mouseleave', startPartnerScrolling);
         container.removeEventListener('touchstart', stopPartnerScrolling);
         container.removeEventListener('touchend', startPartnerScrolling);
       };
     }
-  }, []);
+  }, [isTabletView]);
 
   const techEntries = Object.entries(technologies);
 
@@ -197,25 +218,29 @@ const Technologies = () => {
         </p>
       </div>
       <div className={styles.grid} 
-  ref={cardScrollRef}
-  onTouchStart={(e) => {
-    isMobileRef.current && stopCardScrolling();
-    onTouchStart(e);
-  }}
-  onTouchMove={onTouchMove}
-  onTouchEnd={(e) => {
-    onTouchEnd(e);
-    isMobileRef.current && startCardScrolling();
-  }}
->
+        ref={cardScrollRef}
+        onTouchStart={(e) => {
+          (isMobileRef.current || isTabletView) && stopCardScrolling();
+          onTouchStart(e);
+        }}
+        onTouchMove={onTouchMove}
+        onTouchEnd={(e) => {
+          onTouchEnd(e);
+          (isMobileRef.current || isTabletView) && startCardScrolling();
+        }}
+      >
         {techEntries.map(([category, { icon, iconContainerClass, iconClass, dotClass, items }], index) => (
           <div 
             key={category} 
-            className={`${styles.card} ${index === currentCardIndex ? styles.activeCard : ''}`}
-            onMouseEnter={() => isMobileRef.current && stopCardScrolling()}
-            onMouseLeave={() => isMobileRef.current && startCardScrolling()}
-            onTouchStart={() => isMobileRef.current && stopCardScrolling()}
-            onTouchEnd={() => isMobileRef.current && startCardScrolling()}
+            className={`${styles.card} ${
+              (isMobileRef.current && index === currentCardIndex) || 
+              (isTabletView && getVisibleCards().includes(index)) || 
+              (!isMobileRef.current && !isTabletView) ? styles.activeCard : ''
+            }`}
+            onMouseEnter={() => (isMobileRef.current || isTabletView) && stopCardScrolling()}
+            onMouseLeave={() => (isMobileRef.current || isTabletView) && startCardScrolling()}
+            onTouchStart={() => (isMobileRef.current || isTabletView) && stopCardScrolling()}
+            onTouchEnd={() => (isMobileRef.current || isTabletView) && startCardScrolling()}
           >
             <div className={`${styles.iconContainer} ${iconContainerClass}`}>
               <span className={iconClass}>{icon}</span>
