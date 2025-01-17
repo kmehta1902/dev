@@ -87,7 +87,7 @@ const Footer = () => {
   </br>
   <p><FontAwesomeIcon icon={faUser} /> DevionX - Mr. Shrikrushna Patil</p>
   <p><FontAwesomeIcon icon={faPhone} /> +91 7666675306</p>
-          </div>
+          </div> 
         </div>
       </div>
 

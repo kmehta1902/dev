@@ -9,6 +9,15 @@
   align-items: center;
   justify-content: center;
 }
+.message{
+  margin: auto;
+  max-width:80vw ;
+  height: auto;
+  text-overflow: ellipsis;
+  text-align: center;
+  font-weight: bold;
+  color: #2563EB;
+}
 
 .animation {
   /* background: #f9fafb; */

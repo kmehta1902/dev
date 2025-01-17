@@ -35,7 +35,7 @@ const CountUpNumber = ({ number, delay, shouldStart }) => {
 
 const stats = [
   {
-    number: '100',
+    number: '50',
     label: 'Projects Delivered',
     suffix: '+',
     icon: <Briefcase size={32} style={{ color: '#2563eb' }} />
@@ -47,13 +47,13 @@ const stats = [
     icon: <Users size={32} style={{ color: '#2563eb' }} />
   },
   {
-    number: '95',
+    number: '99',
     label: 'Success Rate',
     suffix: '%',
     icon: <Trophy size={32} style={{ color: '#2563eb' }} />
   },
   {
-    number: '50',
+    number: '20',
     label: 'Software Developers',
     suffix: '+',
     icon: <Computer size={32} style={{ color: '#2563eb' }} />
