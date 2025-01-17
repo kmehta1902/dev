@@ -68,7 +68,7 @@ const ContactForm = () => {
   return (
     <section id="contactform" className={styles.contactContainer}>
       <h1>Contact Us</h1>
-      <p>Get in touch with us for any inquiries or support. We're here to help you succeed.</p>
+      <p className={styles.message}>We’d love to hear from you! If you have any questions about our services, assistance with a project, or want to learn how to work with us to accomplish your goals, our team can assist</p>
 
       <div className={styles.contactGrid}>
         <div className={styles.contactInfo}>
@@ -79,7 +79,7 @@ const ContactForm = () => {
             </div>
             <div>
               <h3>Office Location</h3>
-              <p>H.no 1229 Seetamai Apt,</p>
+              <p>House no. 1229,Seetamai Apt,</p>
               <p>Sect 12D, Kopar Khairane, </p>
               <p>Navi Mumbai 400709</p>
             </div>
@@ -91,10 +91,10 @@ const ContactForm = () => {
             </div>
             <div>
               <h3>Contact Details</h3>
-              <p>Phone:Mr.Ajay Bade: +91 9370613157 </p>
-              <p>Phone:Mr.Shrikrushna Patil: +91 7666675306 </p>
+              <p>Phone: Mr.Ajay Bade: +91 9370613157 </p>
+              <p>Phone: Mr.Shrikrushna Patil: +91 7666675306 </p>
               <p>Email: info@devionx.com</p>
-              <p>Support: support@devionx.com</p>
+              
             </div>
           </div>
 

@@ -248,9 +248,9 @@ const QuoteForm = () => {
   return (
     <section id="quoteform" className={styles.quoteContainer}>
       <h1 className={styles.title}>Get a Free Quote</h1>
-      <p className={styles.subbtitle}>
+      {/* <p className={styles.subbtitle}>
         Share your project details with us, and we'll provide you with a comprehensive proposal.
-      </p>
+      </p> */}
       <br></br>
       <div className={styles.message}>If you’d like to share your project details with us, fill out the form below, then we’ll get back to you with a personalized quote. To submit, fill out the form below. The more details you give, the better we are able to understand what you are looking for so we can provide you with the best solution. </div>
       <br></br>
