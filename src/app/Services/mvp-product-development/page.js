@@ -10,6 +10,7 @@ import Link from 'next/link';
 import styles from './page.module.css';
 import Navbar from '@/app/components/Navbar/Navbar';
 import Footer from '@/app/components/Footer/Footer';
+import SplashCursor from '@/app/components/Cursor/SplashCursor';
 
 const MvpDevelopmentPage = () => {
   const mvpFeatures = [
@@ -88,6 +89,7 @@ const MvpDevelopmentPage = () => {
 
   return (
     <div>
+      <SplashCursor />
       <Navbar />
     <div className={styles.container}>
       {/* Hero Section */}
